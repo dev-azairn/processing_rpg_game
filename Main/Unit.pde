@@ -7,6 +7,10 @@ class Unit {
   Sprite attack;
   
   Unit(JSONObject detail, String idleConfig, String attackConfig, String deathConfig, String walkConfig) {
-    
+     
+  }
+  
+  void render() {
+  
   }
 }
