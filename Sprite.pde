@@ -56,6 +56,7 @@ class Sprite{
       sprites[index] = loadImage("data/" + path + fileNames[index]);
     }
   }
+   
   
   void loadConfig(String configFileName){
     String[] configLines = loadStrings(configFileName);
@@ -72,6 +73,7 @@ class Sprite{
     this.posY = int(configParams[6]);
     this.spriteScale = int(configParams[7]);
   }
+  
   
   void render(){
     imageMode(CENTER);
