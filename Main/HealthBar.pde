@@ -91,7 +91,8 @@ class HealthBar {
     fill(255, 0, 0); // red
     rect(healthBarPosX, healthBarPosY, healthWidth * healthPercent, healthHeight);
   }
-  
+
+  // loadConfig() function
   public void loadConfig(String configFileName){
     String[] StringLines = loadStrings(configFileName);
     String[] configParams = split(StringLines[0], " ");
