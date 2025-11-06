@@ -1,26 +1,51 @@
 class HealthBar {
+  
   // health bar skin
-  PImage healthBarSkin = loadImage("Contents/HealthBar.png");
+  String imageFileName;
+  PImage healthBarSkin;
   
   // skin image size
-  private int skinWidth = 70;
-  private int skinHeight = 20;
+  private int skinWidth;
+  private int skinHeight;
   
-  //health bar scale (default = 1)
+  // health bar scale (default = 1)
   private float scale = 1;
   
   // health bar size
-  private float healthWidth = (skinWidth - 28) * scale;
-  private float healthHeight = (skinHeight - 16) * scale;
+  private float healthWidth;
+  private float healthHeight;
   
   // HealthBar attributes
   private float healthPercent;
   private int maxHealth;
   private int currentHealth;
   
+  // constructor - by loadConfig()
+  public HealthBar(String configFileName, int maxHealth){
+    loadConfig(configFileName);
+    healthBarSkin = loadImage(imageFileName);
+    skinWidth = healthBarSkin.width;
+    skinHeight = healthBarSkin.height;
+    
+    healthWidth = (skinWidth - 20) * scale;
+    healthHeight = (skinHeight - 22) * scale;
+    
+    this.maxHealth = maxHealth;
+    this.currentHealth = maxHealth;
+    this.healthPercent = (float) currentHealth / maxHealth;
+  }
+  
   // constructor - by initializing
   public HealthBar(int maxHealth){
-    this.maxHealth = 100;
+    imageFileName = "HealthBar/HealthBar.png";
+    healthBarSkin = loadImage(imageFileName);
+    skinWidth = healthBarSkin.width;
+    skinHeight = healthBarSkin.height;
+    
+    healthWidth = (skinWidth - 20) * scale;
+    healthHeight = (skinHeight - 22) * scale;
+    
+    this.maxHealth = maxHealth;
     this.currentHealth = maxHealth;
     this.healthPercent = (float) currentHealth / maxHealth;
   }
@@ -58,12 +83,18 @@ class HealthBar {
     image(healthBarSkin, healthBarSkinPosX, healthBarSkinPosY, 
     skinWidth * scale, skinHeight * scale);
     
-    //set health bar (RECTANGLE) position
-    int healthBarPosX = healthBarSkinPosX - 18;
+    // set health bar (RECTANGLE) position
+    int healthBarPosX = healthBarSkinPosX - 19;
     int healthBarPosY = healthBarSkinPosY + 1;
-    //render health bar
+    // render health bar
     rectMode(CORNER);
     fill(255, 0, 0); // red
     rect(healthBarPosX, healthBarPosY, healthWidth * healthPercent, healthHeight);
+  }
+  
+  public void loadConfig(String configFileName){
+    String[] StringLines = loadStrings(configFileName);
+    String[] configParams = split(StringLines[0], " ");
+    imageFileName = configParams[0];
   }
 }
