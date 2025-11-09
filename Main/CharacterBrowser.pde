@@ -10,7 +10,7 @@ class CharacterBrowser {
   
   void renderGUI() {
     // Start_Button
-    Button startBtn = new Button();
+    // Button startBtn = new Button();
     
     
     // Stage

@@ -1,0 +1,119 @@
+[
+  {
+    "detail": {
+      "name": "John RPG",
+      "health": 120,
+      "atk": 15,
+      "def": 8,
+      "description": "Unknown hero who forgot his past for whatever reason."
+    },
+    "idleConfig": "Warrior Idle Warrior_Idle_ .png 8 100 100 4",
+    "attackConfig": "Warrior Attack Warrior_Attack_ .png 8 100 100 4",
+    "walkConfig": "Warrior Walk Warrior_Walk_ .png 8 100 100 4",
+    "deathConfig": "Warrior Death Warrior_Death_ .png 8 100 100 4"
+  },
+  {
+    "detail": {
+      "name": "Lily",
+      "health": 70,
+      "atk": 20,
+      "def": 5,
+      "description": "Daughter of the strongest mage in the world, she learned everything from her mother."
+    },
+    "idleConfig": "Lily Idle Lily_Idle_ .png 8 100 100 4",
+    "attackConfig": "Lily Attack Lily_Attack_ .png 8 100 100 4",
+    "walkConfig": "Lily Walk Lily_Walk_ .png 8 100 100 4",
+    "deathConfig": "Lily Death Lily_Death_ .png 8 100 100 4"
+  },
+  {
+    "detail": {
+      "name": "Mary",
+      "health": 100,
+      "atk": 8,
+      "def": 12,
+      "description": "An orphan who grew up in a church. She developed an understanding of the world and religion there."
+    },
+    "idleConfig": "Mary Idle Mary_Idle_ .png 8 100 100 4",
+    "attackConfig": "Mary Attack Mary_Attack_ .png 8 100 100 4",
+    "walkConfig": "Mary Walk Mary_Walk_ .png 8 100 100 4",
+    "deathConfig": "Mary Death Mary_Death_ .png 8 100 100 4"
+  },
+  {
+    "detail": {
+      "name": "Luke",
+      "health": 110,
+      "atk": 13,
+      "def": 10,
+      "description": "A young man from a small village who wants to be a soldier one day."
+    },
+    "idleConfig": "Luke Idle Luke_Idle_ .png 8 100 100 4",
+    "attackConfig": "Luke Attack Luke_Attack_ .png 8 100 100 4",
+    "walkConfig": "Luke Walk Luke_Walk_ .png 8 100 100 4",
+    "deathConfig": "Luke Death Luke_Death_ .png 8 100 100 4"
+  },
+  {
+    "detail": {
+      "name": "Adira",
+      "health": 150,
+      "atk": 20,
+      "def": 20,
+      "description": "She is a commander of Templar and known as the strongest woman in the world."
+    },
+    "idleConfig": "Adira Idle Adira_Idle_ .png 8 100 100 4",
+    "attackConfig": "Adira Attack Adira_Attack_ .png 8 100 100 4",
+    "walkConfig": "Adira Walk Adira_Walk_ .png 8 100 100 4",
+    "deathConfig": "Adira Death Adira_Death_ .png 8 100 100 4"
+  },
+  {
+    "detail": {
+      "name": "Kiara",
+      "health": 140,
+      "atk": 12,
+      "def": 18,
+      "description": "Adira's sister and biggest fan. She admires her strength, hoping that one day she will be like her."
+    },
+    "idleConfig": "Kiara Idle Kiara_Idle_ .png 8 100 100 4",
+    "attackConfig": "Kiara Attack Kiara_Attack_ .png 8 100 100 4",
+    "walkConfig": "Kiara Walk Kiara_Walk_ .png 8 100 100 4",
+    "deathConfig": "Kiara Death Kiara_Death_ .png 8 100 100 4"
+  },
+  {
+    "detail": {
+      "name": "Land",
+      "health": 130,
+      "atk": 17,
+      "def": 12,
+      "description": "He became a lancer because he thinks riding a horse is cool and wants to name himself 'Land the Lancer'."
+    },
+    "idleConfig": "Land Idle Land_Idle_ .png 8 100 100 4",
+    "attackConfig": "Land Attack Land_Attack_ .png 8 100 100 4",
+    "walkConfig": "Land Walk Land_Walk_ .png 8 100 100 4",
+    "deathConfig": "Land Death Land_Death_ .png 8 100 100 4"
+  },
+  {
+    "detail": {
+      "name": "Timmie",
+      "health": 90,
+      "atk": 18,
+      "def": 6,
+      "description": "Grew up in a forest with hunters; he has strong survival and stealth skills."
+    },
+    "idleConfig": "Timmie Idle Timmie_Idle_ .png 8 100 100 4",
+    "attackConfig": "Timmie Attack Timmie_Attack_ .png 8 100 100 4",
+    "walkConfig": "Timmie Walk Timmie_Walk_ .png 8 100 100 4",
+    "deathConfig": "Timmie Death Timmie_Death_ .png 8 100 100 4"
+  },
+  {
+    "detail": {
+      "name": "Cole",
+      "health": 140,
+      "atk": 18,
+      "def": 15,
+      "description": "He's scared of getting hit, so he stacks the strongest armor possible and only uses an axe because of the weight."
+    },
+    "idleConfig": "Cole Idle Cole_Idle_ .png 8 100 100 4",
+    "attackConfig": "Cole Attack Cole_Attack_ .png 8 100 100 4",
+    "walkConfig": "Cole Walk Cole_Walk_ .png 8 100 100 4",
+    "deathConfig": "Cole Death Cole_Death_ .png 8 100 100 4"
+  }
+]
