@@ -7,10 +7,10 @@
       "def": 8,
       "description": "Unknown hero who forgot his past for whatever reason."
     },
-    "idleConfig": "Warrior Idle Warrior_Idle_ .png 8 100 100 4",
-    "attackConfig": "Warrior Attack Warrior_Attack_ .png 8 100 100 4",
-    "walkConfig": "Warrior Walk Warrior_Walk_ .png 8 100 100 4",
-    "deathConfig": "Warrior Death Warrior_Death_ .png 8 100 100 4"
+    "idleConfig": "John RPG Idle John RPG_Idle_ .png 8 100 100 4",
+    "attackConfig": "John RPG Attack John RPG_Attack_ .png 8 100 100 4",
+    "walkConfig": "John RPG Walk John RPG_Walk_ .png 8 100 100 4",
+    "deathConfig": "John RPG Death John RPG_Death_ .png 8 100 100 4"
   },
   {
     "detail": {
