@@ -41,6 +41,7 @@ class FileManager {
   }
   
   private void loadUnit(String configDirPath, String configPath){
+    
     JSONArray characterJson = loadJSONArray(configPath);
       if (characterJson == null) {
         println("Cannot initialize json object");

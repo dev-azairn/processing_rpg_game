@@ -27,7 +27,7 @@ class CharacterBrowser {
     
     // List Character 
     for (Unit unit: units.values()) {
-      unit.render();
+       unit.render();
     }
    
     // Scroll-Bar

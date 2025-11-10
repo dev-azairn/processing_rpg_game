@@ -1,1 +1,1 @@
-Swordsman Attack Swordsman_Attack_ .png 12 100 100 4
+Swordsman Attack Swordsman_Attack_ .png 9 100 100 4

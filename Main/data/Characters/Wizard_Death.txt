@@ -1,1 +1,1 @@
-Wizzard Death Wizzad_Death_ .png 4 100 100 4
+Wizard Death Wizard_Death_ .png 3 100 100 4

@@ -1,1 +1,1 @@
-Wizzard Walk Wizzad_Walk_ .png 8 100 100 4
+Wizard Walk Wizard_Walk_ .png 8 100 100 4
