@@ -34,13 +34,13 @@ class FileManager {
         else for (String line: lines) loadData(connectedPath(configDirPath, line));
     } else if(isExist(configFileName + ".json")) {
         fileName = configFileName + ".json";
-        if(fileName.contains("Characters")) loadUnit(fileName);
+        if(fileName.contains("Characters")) loadUnit(configDirPath, fileName);
     } else {
       println("No config file");
     }
   }
   
-  private void loadUnit(String configPath){
+  private void loadUnit(String configDirPath, String configPath){
     JSONArray characterJson = loadJSONArray(configPath);
       if (characterJson == null) {
         println("Cannot initialize json object");
@@ -51,10 +51,11 @@ class FileManager {
         JSONObject data = characterJson.getJSONObject(i);
         JSONObject detail = data.getJSONObject("detail");
         units.put(detail.getString("name"), 
-          new Unit(detail, data.getString("idleConfig"), 
-          data.getString("attackConfig"), 
-          data.getString("walkConfig"), 
-          data.getString("deathConfig")));
+          new Unit(detail, 
+          connectedPath(configDirPath, data.getString("idleConfig")), 
+          connectedPath(configDirPath, data.getString("attackConfig")), 
+          connectedPath(configDirPath, data.getString("walkConfig")), 
+          connectedPath(configDirPath, data.getString("deathConfig"))));
         // Test
         println(units.get(detail.get("name")));
       }

@@ -1,0 +1,119 @@
+[
+  {
+    "detail": {
+      "name": "John RPG",
+      "health": 120,
+      "atk": 15,
+      "def": 8,
+      "description": "Unknown hero who forgot his past for whatever reason."
+    },
+    "idleConfig": "Swordsman_Idle.txt",
+    "attackConfig": "Swordsman_Attack.txt",
+    "walkConfig": "Swordsman_Walk.txt",
+    "deathConfig": "Swordsman_Death.txt"
+  },
+  {
+    "detail": {
+      "name": "Lily",
+      "health": 70,
+      "atk": 20,
+      "def": 5,
+      "description": "Daughter of the strongest mage in the world, she learned everything from her mother."
+    },
+    "idleConfig": "Wizard_Idle.txt",
+    "attackConfig": "Wizard_Attack.txt",
+    "walkConfig": "Wizard_Walk.txt",
+    "deathConfig": "Wizard_Death.txt"
+  },
+  {
+    "detail": {
+      "name": "Mary",
+      "health": 100,
+      "atk": 8,
+      "def": 12,
+      "description": "An orphan who grew up in a church. She developed an understanding of the world and religion there."
+    },
+    "idleConfig": "Priest_Idle.txt",
+    "attackConfig": "Priest_Attack.txt",
+    "walkConfig": "Priest_Walk.txt",
+    "deathConfig": "Priest_Death.txt"
+  },
+  {
+    "detail": {
+      "name": "Luke",
+      "health": 110,
+      "atk": 13,
+      "def": 10,
+      "description": "A young man from a small village who wants to be a soldier one day."
+    },
+    "idleConfig": "Soldier_Idle.txt",
+    "attackConfig": "Soldier_Attack.txt",
+    "walkConfig": "Soldier_Walk.txt",
+    "deathConfig": "Soldier_Death.txt"
+  },
+  {
+    "detail": {
+      "name": "Adira",
+      "health": 150,
+      "atk": 20,
+      "def": 20,
+      "description": "She is a commander of Templar and known as the strongest woman in the world."
+    },
+    "idleConfig": "Knight_Templar_Idle.txt",
+    "attackConfig": "Knight_Templar_Attack.txt",
+    "walkConfig": "Knight_Templar_Walk.txt",
+    "deathConfig": "Knight_Templar_Death.txt"
+  },
+  {
+    "detail": {
+      "name": "Kiara",
+      "health": 140,
+      "atk": 12,
+      "def": 18,
+      "description": "Adira's sister and biggest fan. She admires her strength, hoping that one day she will be like her."
+    },
+    "idleConfig": "Knight_Idle.txt",
+    "attackConfig": "Knight_Attack.txt",
+    "walkConfig": "Knight_Walk.txt",
+    "deathConfig": "Knight_Death.txt"
+  },
+  {
+    "detail": {
+      "name": "Land",
+      "health": 130,
+      "atk": 17,
+      "def": 12,
+      "description": "He became a lancer because he thinks riding a horse is cool and wants to name himself 'Land the Lancer'."
+    },
+    "idleConfig": "Lancer_Idle.txt",
+    "attackConfig": "Lancer_Attack.txt",
+    "walkConfig": "Lancer_Walk.txt",
+    "deathConfig": "Lancer_Death.txt"
+  },
+  {
+    "detail": {
+      "name": "Timmie",
+      "health": 90,
+      "atk": 18,
+      "def": 6,
+      "description": "Grew up in a forest with hunters; he has strong survival and stealth skills."
+    },
+    "idleConfig": "Archer_Idle.txt",
+    "attackConfig": "Archer_Attack.txt",
+    "walkConfig": "Archer_Walk.txt",
+    "deathConfig": "Archer_Death.txt"
+  },
+  {
+    "detail": {
+      "name": "Cole",
+      "health": 140,
+      "atk": 18,
+      "def": 15,
+      "description": "He's scared of getting hit, so he stacks the strongest armor possible and only uses an axe because of the weight."
+    },
+    "idleConfig": "Axeman_Idle.txt",
+    "attackConfig": "Axeman_Attack.txt",
+    "walkConfig": "Axeman_Walk.txt",
+    "deathConfig": "Axeman_Death.txt"
+  }
+]

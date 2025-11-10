@@ -5,7 +5,7 @@ HashMap<String, Unit> units;
 CharacterBrowser characterBrowser;
 
 void setup() {
-  size(100,100);
+  size(500, 500);
   frameRate(10);
   manager = new FileManager("");
   manager.loadData("");
@@ -13,6 +13,7 @@ void setup() {
 }
 
 void draw() {
+  background(255);
   characterBrowser.renderGUI();
 }
 

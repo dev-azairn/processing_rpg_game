@@ -23,10 +23,12 @@ class CharacterBrowser {
     
     
     // Character Text
-    
+     
     
     // List Character 
-  
+    for (Unit unit: units.values()) {
+      unit.render();
+    }
    
     // Scroll-Bar
     

@@ -58,8 +58,9 @@ class Sprite{
   }
    
   
-  void loadConfig(String configText){
-    String[] configParams = split(configText, ' ');
+  void loadConfig(String configFileName){
+    String[] configLines = loadStrings(configFileName);
+    String[] configParams = split(configLines[0], ' ');
     for(int i = 0; i < configParams.length; i++){
       println("["+ i + "] " + configParams[i]);
     }
