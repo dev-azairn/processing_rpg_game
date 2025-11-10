@@ -1,10 +1,10 @@
 class UnitDetail {
   private String name;
   private String description;
-  private Float health;
-  private Float atk;
+  private float health;
+  private float atk;
    
-  public UnitDetail(String name, String description, Float health, Float atk){
+  UnitDetail(String name, String description, float health, float atk){
     this.name = name;
     this.description = description;
     this.health = health;
@@ -44,4 +44,7 @@ class UnitDetail {
     public void setAtk(float atk) {
         this.atk = atk;
     }  
+    
+    
+    
 }

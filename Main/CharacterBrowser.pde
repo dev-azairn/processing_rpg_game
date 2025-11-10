@@ -13,7 +13,7 @@ class CharacterBrowser {
     // Button startBtn = new Button();
     
     
-    // Stage
+    // Stage Podium
     
     
     // Status List
@@ -26,10 +26,8 @@ class CharacterBrowser {
     
     
     // List Character 
-    for (String unitName: units.keySet()) {
-      
-    }
-    
+  
+   
     // Scroll-Bar
     
   }

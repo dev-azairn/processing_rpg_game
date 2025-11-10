@@ -111,9 +111,9 @@
       "def": 15,
       "description": "He's scared of getting hit, so he stacks the strongest armor possible and only uses an axe because of the weight."
     },
-    "idleConfig": "Armored Axeman Idle Armored Axeman_Idle_ .png 6 100 100 4",
-    "attackConfig": "Armored Axeman Attack Armored Axeman_Attack_ .png 9 100 100 4",
-    "walkConfig": "Armored Axeman Walk Armored Axeman_Walk_ .png 8 100 100 4",
-    "deathConfig": "Armored Axeman Death Armored Axeman_Death_ .png 4 100 100 4"
+    "idleConfig": "Axeman Idle Armored Axeman_Idle_ .png 6 100 100 4",
+    "attackConfig": "Axeman Attack Armored Axeman_Attack_ .png 9 100 100 4",
+    "walkConfig": "Axeman Walk Armored Axeman_Walk_ .png 8 100 100 4",
+    "deathConfig": "Axeman Death Armored Axeman_Death_ .png 4 100 100 4"
   }
 ]

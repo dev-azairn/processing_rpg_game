@@ -8,7 +8,7 @@ void setup() {
   size(100,100);
   frameRate(10);
   manager = new FileManager("");
-  units = manager.loadUnitData("Characters","config.json");
+  manager.loadData("");
   characterBrowser = new CharacterBrowser(units);
 }
 
