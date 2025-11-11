@@ -66,9 +66,10 @@ class CharacterBrowser {
    // Left-click : select unit-1
      int i = 0;
      for (String hkey: units.keySet()) {
+       println(hkey, i);
        Unit unit = units.get(hkey);
        if (mouseX >= 165*i + 100 - 150/2 && 165*i + 100 + 150/2 >= mouseX
-       && mouseY >= height - 100 - 150/2 && height - 100 + 150/2 >= mouseX) { 
+       && mouseY >= height - 100 - 150/2 && height - 100 + 150/2 >= mouseY) { 
          if (mouseButton == LEFT) {
            if(selectedUnit[0] != null) selectedUnit[0].unselect();
            if (selectedUnit[1] == unit) return;
