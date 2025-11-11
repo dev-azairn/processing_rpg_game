@@ -8,8 +8,11 @@ CharacterBrowser characterBrowser;
 
 float aspectRatio = 16.0 / 9.0; // Example: 16:9 aspect ratio
 
+
 void setup() {
-  size(800, 450);
+  pixelDensity(1);
+  
+  size(1280, 720);
   windowResizable(true);
   frameRate(24);
   manager = new FileManager("");
@@ -19,13 +22,23 @@ void setup() {
 
 void draw() {
   background(255);
+  
   characterBrowser.renderGUI();
 }
+
 
 void mousePressed() {
   characterBrowser.mousePressed();
 }
 
+void windowResized() {
+  if(width < 800) {
+    windowResize(800, height);
+  } 
+  if (height < 450) {
+    windowResize(width, 450);
+  }
+}
 
 void rectGradient(int x, int y, int w, int h, color c1, color c2, float radianAngle, 
 int strokeWidth,

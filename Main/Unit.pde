@@ -57,6 +57,15 @@ class Unit {
      } else { 
        idle.play();
      }
+     stroke(0); 
+  
+  // 2. Set the stroke thickness
+     stroke(0);
+     strokeWeight(4);
+     fill(255);
+     textAlign(CENTER);
+     textSize(16);
+     text(detail.getName(), posX, posY - this.width);
      healthBar.render(posX, posY - this.width/2);
      
   }
