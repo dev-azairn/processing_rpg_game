@@ -5,8 +5,8 @@ class HealthBar {
   PImage healthBarSkin;
   
   // skin image size
-  private int skinWidth;
-  private int skinHeight;
+  private float skinWidth;
+  private float skinHeight;
   
   // health bar scale (default = 1)
   private float scale = 1;
@@ -37,7 +37,7 @@ class HealthBar {
   
   // constructor - by initializing
   public HealthBar(int maxHealth){
-    imageFileName = "data/HealthBar/HealthBar.png";
+    imageFileName = "HealthBar/HealthBar.png";
     healthBarSkin = loadImage(imageFileName);
     skinWidth = healthBarSkin.width;
     skinHeight = healthBarSkin.height;
@@ -84,18 +84,21 @@ class HealthBar {
     skinWidth * scale, skinHeight * scale);
     
     // set health bar (RECTANGLE) position
-    int healthBarPosX = healthBarSkinPosX - 19;
-    int healthBarPosY = healthBarSkinPosY + 1;
+    float healthBarPosX = healthBarSkinPosX - (19 * scale);
+    float healthBarPosY = healthBarSkinPosY + (1 * scale);
     // render health bar
     rectMode(CORNER);
     fill(255, 0, 0); // red
-    rect(healthBarPosX, healthBarPosY, healthWidth * healthPercent, healthHeight);
+    rect(healthBarPosX, healthBarPosY, (healthWidth * healthPercent), healthHeight);
   }
-
-  // loadConfig() function
+  
   public void loadConfig(String configFileName){
     String[] StringLines = loadStrings(configFileName);
     String[] configParams = split(StringLines[0], " ");
     imageFileName = configParams[0];
+  }
+  
+  public void setHealthBarScale(float scale){
+    this.scale = scale;
   }
 }
