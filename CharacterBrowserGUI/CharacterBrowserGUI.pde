@@ -1,4 +1,103 @@
+// Main GUI
 import java.io.File;
+
+// Universal Constant
+FileManager manager;
+HashMap<String, Unit> units;
+HashMap<String, PImage> staticElements;
+CharacterBrowser characterBrowser;
+
+float aspectRatio = 16.0 / 9.0; // Example: 16:9 aspect ratio
+
+
+void setup() {
+  pixelDensity(1);
+  
+  size(1280, 720);
+  windowResizable(true);
+  frameRate(24);
+  manager = new FileManager("");
+  manager.loadData();
+  characterBrowser = new CharacterBrowser(units);
+}
+
+void draw() {
+  background(255);
+  
+  characterBrowser.renderGUI();
+}
+
+
+void mousePressed() {
+  characterBrowser.mousePressed();
+}
+
+void windowResized() {
+  if(width < 1280) {
+    windowResize(800, height);
+  } 
+  if (height < 720) {
+    windowResize(width, 450);
+  }
+}
+
+void rectGradient(int x, int y, int w, int h, color c1, color c2, float radianAngle, 
+int strokeWidth,
+color strokeColor,
+int borderRadius,
+int rectMode) {
+  
+  PImage image = createImage(w, h, ARGB);
+  PGraphics pg = createGraphics(w, h);
+
+  image.loadPixels();
+
+  float dx = cos(radianAngle);
+  float dy = sin(radianAngle);
+
+  float centerX = w / 2.0;
+  float centerY = h / 2.0;
+
+  float maxDist = (abs(w * dx) + abs(h * dy)) / 2.0;
+
+  for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+
+      int index = i * w + j;
+
+      float relX = j - centerX;
+      float relY = i - centerY;
+      
+      float projection = relX * dx + relY * dy;
+
+      float amount = map(projection, -maxDist, maxDist, 0, 1);
+
+      color c = lerpColor(c1, c2, amount);
+      
+      image.pixels[index] = c;
+    }
+  }
+
+  image.updatePixels();
+
+  pg.beginDraw();
+  pg.background(0);
+  pg.fill(255);
+  pg.noStroke();
+  pg.rect(0, 0, w, h, borderRadius);
+  pg.endDraw();
+  imageMode(rectMode);
+  image.mask(pg);
+  
+  rectMode(rectMode);
+  image(image, x, y);
+  noFill();
+  strokeWeight(strokeWidth);
+  stroke(strokeColor);
+  rect(x, y, w, h, borderRadius);
+  
+}
+
 
 class FileManager {
   private String baseDir;
@@ -11,33 +110,6 @@ class FileManager {
   
    void loadData() {
     
-    //String configFileName = (configDirPath.equals(""))? "config" : connectedPath(configDirPath, "config");
-    //println("Path: " + configFileName);
-    //String fileName;
-    //String[] splittedLine;
-    //if (isExist(configFileName + ".ini")) {
-    //    println("Hello");
-    //    fileName = sketchPath(configFileName) + ".ini";
-    //    String[] lines = loadStrings(fileName);
-    //    // Optimization Configuration
-    //    if ((splittedLine = lines[0].split("=")).length > 1) {
-    //      configuration(configDirPath, lines);
-    //    }
-        
-    //    // Data Config
-    //    else if ((splittedLine = lines[0].split(" ")).length > 1) {
-    //      if (splittedLine[0].equals("Podium")) 
-    //      {
-            
-    //      }
-    //    }
-    //    else for (String line: lines) loadData(connectedPath(configDirPath, line));
-    //} else if(isExist(configFileName + ".json")) {
-    //    fileName = configFileName + ".json";
-    //    if(fileName.contains("Characters")) loadUnit(configDirPath, fileName);
-    //} else {
-    //  println("No config file");
-    //}
     if (!isExist("config.ini")) {
       println("No configuration file!!!");
       return;
@@ -105,10 +177,4 @@ class FileManager {
   }
   
   
-  //private void configuration(String configDirPath,String[] lines) {
-  //  for (String line: lines) {
-  //       String[] splittedLine = line.split("=");
-  //       loadData(connectedPath(configDirPath, splittedLine[1]));
-  //  }
-  //}
 }

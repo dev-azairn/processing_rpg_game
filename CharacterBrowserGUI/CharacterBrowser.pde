@@ -15,9 +15,7 @@ class CharacterBrowser {
     // stage
       imageMode(CORNER);
       image(background,0,0, width, height);
-      // Start_Button
-      // Button startBtn = new Button();
-      
+
       
       // Display selected unit
       stroke(0);

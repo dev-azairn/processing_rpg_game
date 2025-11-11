@@ -9,10 +9,6 @@ class CharacterDialogue {
   String currentSpeaker = "";
   String currentLine = "";
   
-  // PImage dialogueBoxImage;
-  // PFont speakerFont;
-  // PFont dialogueFont; 
-
   CharacterDialogue(String jsonFilePath) {
     allDialogueData = loadJSONObject(jsonFilePath);     
     if (allDialogueData == null) {

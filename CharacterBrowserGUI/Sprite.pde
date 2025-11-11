@@ -1,4 +1,4 @@
-class Sprite{
+class Sprite {
   //configs
   String characterFolder;
   String characterAction;
