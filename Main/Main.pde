@@ -11,7 +11,7 @@ CharacterBrowser characterBrowser;
 void setup() {
   size(1600, 900);
   windowResizable(true);
-  frameRate(10);
+  frameRate(5);
   manager = new FileManager("");
   manager.loadData();
   characterBrowser = new CharacterBrowser(units);

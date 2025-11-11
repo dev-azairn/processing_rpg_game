@@ -117,5 +117,9 @@
       "walkConfig": "Axeman_Walk.txt",
       "deathConfig": "Axeman_Death.txt"
     }
-  ]
+  ],
+  "scene": {
+    
+
+  }
 }

@@ -84,7 +84,6 @@ class FileManager {
           connectedPath(configDir, data.getString("walkConfig")), 
           connectedPath(configDir, data.getString("deathConfig")),
           connectedPath(configDir + "/HealthBar", "config.ini"));
-        unit.setPosition(175*i + 100, height - 100);
         units.put(detail.getString("name"), unit);
         
         // Test
