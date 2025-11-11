@@ -42,10 +42,7 @@ void windowResized() {
 }
 
 void rectGradient(int x, int y, int w, int h, color c1, color c2, float radianAngle, 
-int strokeWidth,
-color strokeColor,
-int borderRadius,
-int rectMode) {
+int strokeWidth, color strokeColor, int borderRadius, int rectMode) {
   
   PImage image = createImage(w, h, ARGB);
   PGraphics pg = createGraphics(w, h);
@@ -54,26 +51,18 @@ int rectMode) {
 
   float dx = cos(radianAngle);
   float dy = sin(radianAngle);
-
   float centerX = w / 2.0;
   float centerY = h / 2.0;
-
   float maxDist = (abs(w * dx) + abs(h * dy)) / 2.0;
 
   for (int i = 0; i < h; i++) {
     for (int j = 0; j < w; j++) {
-
       int index = i * w + j;
-
       float relX = j - centerX;
       float relY = i - centerY;
-      
       float projection = relX * dx + relY * dy;
-
       float amount = map(projection, -maxDist, maxDist, 0, 1);
-
       color c = lerpColor(c1, c2, amount);
-      
       image.pixels[index] = c;
     }
   }
@@ -94,8 +83,7 @@ int rectMode) {
   noFill();
   strokeWeight(strokeWidth);
   stroke(strokeColor);
-  rect(x, y, w, h, borderRadius);
-  
+  rect(x, y, w, h, borderRadius);  
 }
 
 
@@ -115,27 +103,19 @@ class FileManager {
       return;
     }
     
-    String[] configLines = loadStrings("config.ini");
-    HashMap<String, String> config = new HashMap<>();
-    for(String line: configLines)
-    {
-      String[] splitted = line.split("=");
-      config.put(splitted[0], splitted[1]);
-    }
-    
-    String dataDir = config.get("data");
+    String dataDir = "data";
     JSONObject dataConfig = loadJSONObject(connectedPath(dataDir, "config.json"));
     if (dataConfig != null) {
       // Load unit by units
       loadUnit(dataConfig.getJSONArray("units"), dataDir);
       // Load elements from registered directory
-      
     }
     
     // loadDLC
-    if(Boolean.parseBoolean(config.get("isDLC")))
+    if(isExist("DLC/config.json"))
     {
-      
+      println("Starting DLC implementation");
+      // Recursively run update for DLC configuration in every folder
     }
     
  }
