@@ -9,7 +9,7 @@ class HealthBar {
   private float skinHeight;
   
   // health bar scale (default = 1)
-  private float scale = 1;
+  private float scale = 2;
   
   // health bar size
   private float healthWidth;
@@ -17,11 +17,11 @@ class HealthBar {
   
   // HealthBar attributes
   private float healthPercent;
-  private int maxHealth;
-  private int currentHealth;
+  private float maxHealth;
+  private float currentHealth;
   
   // constructor - by loadConfig()
-  public HealthBar(String configFileName, int maxHealth){
+  public HealthBar(String configFileName, float maxHealth){
     loadConfig(configFileName);
     healthBarSkin = loadImage(imageFileName);
     skinWidth = healthBarSkin.width;
@@ -36,8 +36,8 @@ class HealthBar {
   }
   
   // constructor - by initializing
-  public HealthBar(int maxHealth){
-    imageFileName = "HealthBar/HealthBar.png";
+  public HealthBar(float maxHealth){
+    imageFileName = "data/HealthBar/HealthBar.png";
     healthBarSkin = loadImage(imageFileName);
     skinWidth = healthBarSkin.width;
     skinHeight = healthBarSkin.height;
@@ -51,16 +51,16 @@ class HealthBar {
   }
   
   // getters
-  public int getMaxHealth(){
+  public float getMaxHealth(){
     return this.maxHealth;
   }
   
-  public int getCurrrentHealth(){
+  public float getCurrrentHealth(){
     return this.currentHealth;
   }
   
   // update current health
-  public void updateCurrentHealth(int newCurrentHealth){
+  public void updateCurrentHealth(float newCurrentHealth){
     if(newCurrentHealth <= maxHealth && newCurrentHealth >= 0){
       this.currentHealth = newCurrentHealth;
       healthPercent = (float) currentHealth / maxHealth; //update healthPercent
