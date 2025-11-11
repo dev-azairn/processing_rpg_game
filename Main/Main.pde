@@ -32,10 +32,10 @@ void mousePressed() {
 }
 
 void windowResized() {
-  if(width < 800) {
+  if(width < 1280) {
     windowResize(800, height);
   } 
-  if (height < 450) {
+  if (height < 720) {
     windowResize(width, 450);
   }
 }

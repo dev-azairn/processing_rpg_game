@@ -57,7 +57,7 @@ class Unit {
      } else { 
        idle.play();
      }
-     stroke(0); 
+     
   
   // 2. Set the stroke thickness
      stroke(0);

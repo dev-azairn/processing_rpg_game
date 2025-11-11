@@ -11,26 +11,47 @@ class CharacterBrowser {
   
   
   
-  void renderGUI() {
+    void renderGUI() {
     // stage
-    imageMode(CORNER);
-    image(background,0,0, width, height);
-    // Start_Button
-    // Button startBtn = new Button();
-    
-    
-    // Display selected unit
-    
-    for (int i = 0; i < selectedUnit.length; i++) {
-      if (selectedUnit[i] == null) continue;
-      selectedUnit[i].setPosition((i + 1)*300, 400);
-      selectedUnit[i].render();
-    }
+      imageMode(CORNER);
+      image(background,0,0, width, height);
+      // Start_Button
+      // Button startBtn = new Button();
+      
+      
+      // Display selected unit
+      stroke(0);
+      strokeWeight(2);
+      rectMode(CORNER);
+      fill(0,0,0,50);
+      rect(width-300, 100, 300, 400);
+      for (int i = 0; i < selectedUnit.length; i++) {
+        
+        if (selectedUnit[i] == null) {
+          stroke(0);
+          strokeWeight(2);
+          rectMode(CORNER);
+          noFill();
+          rect(width-300, 100 + i*200, 300, 200);
+          fill(255);
+          textSize(16);
+          textAlign(CENTER);
+          text("No selected character", width-150, 200 + i*200);
+          continue;
+        }
+        stroke(0);
+         strokeWeight(2);
+         rectMode(CORNER);
+         fill(255);
+         rect(width-300, 100 + i*200, 300, 200);
+        selectedUnit[i].setPosition((i + 1)*100 + 300, (i)*100 + 350);
+        selectedUnit[i].render();
+        
+      
+     }
     
     
     // Status List
-    fill(255);
-    rect(width - 200, 120, 200,100);
     
     // Border
     
@@ -72,12 +93,22 @@ class CharacterBrowser {
        if (mouseX >= 165*i + 100 - 150/2 && 165*i + 100 + 150/2 >= mouseX
        && mouseY >= height - 100 - 150/2 && height - 100 + 150/2 >= mouseY) { 
          if (mouseButton == LEFT) {
+           if (selectedUnit[0] == unit) {
+              selectedUnit[0].unselect();
+              selectedUnit[0] = null;
+              return;
+           }
            if (selectedUnit[1] == unit) return;
            if(selectedUnit[0] != null) selectedUnit[0].unselect();
            unit.select();
            selectedUnit[0] = unit;
            println("Selected:" + unit);
          } else if (mouseButton == RIGHT) {
+           if (selectedUnit[1] == unit) {
+              selectedUnit[1].unselect();
+              selectedUnit[1] = null;
+              return;
+           }
            if (selectedUnit[0] == unit) return;
            if(selectedUnit[1] != null) selectedUnit[1].unselect();
            unit.select();
@@ -98,11 +129,4 @@ class CharacterBrowser {
   }
   
   
-}
-
-class Status {
-   
-  void render(int posX, int posY) {
-  
-  }
 }
