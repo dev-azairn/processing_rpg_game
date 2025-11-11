@@ -26,20 +26,6 @@ void mousePressed() {
   characterBrowser.mousePressed();
 }
 
-void surfaceSizeChanged() {
-  float currentAspectRatio = (float)width / height;
-
-  if (currentAspectRatio > aspectRatio) {
-    // Window is wider than target aspect ratio, limit by height
-    int newWidth = (int)(height * aspectRatio);
-    surface.setSize(newWidth, height);
-  } else if (currentAspectRatio < aspectRatio) {
-    // Window is taller than target aspect ratio, limit by width
-    int newHeight = (int)(width / aspectRatio);
-    surface.setSize(width, newHeight);
-  }
-  // If currentAspectRatio == aspectRatio, no change needed
-}
 
 void rectGradient(int x, int y, int w, int h, color c1, color c2, float radianAngle, 
 int strokeWidth,
