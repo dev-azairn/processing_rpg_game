@@ -64,7 +64,7 @@ class Sprite{
     for(int i = 0; i < configParams.length; i++){
       println("["+ i + "] " + configParams[i]);
     }
-    this.characterFolder = "Characters/" + configParams[0];
+    this.characterFolder = configParams[0];
     this.characterAction = configParams[1];
     this.imageFileName = configParams[2];
     this.fileExtension = configParams[3];

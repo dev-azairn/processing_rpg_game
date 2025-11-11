@@ -37,7 +37,7 @@ class HealthBar {
   
   // constructor - by initializing
   public HealthBar(int maxHealth){
-    imageFileName = "HealthBar/HealthBar.png";
+    imageFileName = "data/HealthBar/HealthBar.png";
     healthBarSkin = loadImage(imageFileName);
     skinWidth = healthBarSkin.width;
     skinHeight = healthBarSkin.height;

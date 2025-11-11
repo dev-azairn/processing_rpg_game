@@ -6,19 +6,33 @@ class Unit {
   Sprite walk;
   Sprite attack;
   
-  int xpos;
-  int ypos;
+  int posX;
+  int posY;
   
-  Unit(JSONObject detail, String idleConfig, String attackConfig, String deathConfig, String walkConfig) {
+  Unit(JSONObject detail, String idleConfig, String attackConfig, String deathConfig, String walkConfig, String healthBarConfig) {
      this.detail = new UnitDetail(detail.getString("name"), detail.getString("description"), detail.getFloat("health"), detail.getFloat("atk"));  
-     idle = new Sprite(idleConfig);
-     attack = new Sprite(attackConfig);
-     walk = new Sprite(walkConfig);
-     death = new Sprite(deathConfig);
+     this.idle = new Sprite(idleConfig);
+     this.attack = new Sprite(attackConfig);
+     this.walk = new Sprite(walkConfig);
+     this.death = new Sprite(deathConfig);
+     this.healthBar = new HealthBar(detail.getInt("health"));
      idle.loadImageData();
      attack.loadImageData();
      walk.loadImageData();
      death.loadImageData();
+  }
+  
+  void setPosition(int posX, int posY) {
+    this.posX = posX;
+    this.posY = posY;
+    idle.posX = posX;
+    death.posX = posX;
+    walk.posX = posX;
+    attack.posX = posX;        
+    idle.posY = posY + 25;
+    walk.posY = posY + 25;
+    death.posY = posY + 25;
+    attack.posY = posY + 25;
   }
   
   void render() {

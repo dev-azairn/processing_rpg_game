@@ -1,0 +1,1 @@
+Knight Attack Knight_Attack_ .png 7 100 100 3
