@@ -40,29 +40,29 @@ class Unit {
     death.posX = posX;
     walk.posX = posX;
     attack.posX = posX;        
-    idle.posY = posY + 25;
-    walk.posY = posY + 25;
-    death.posY = posY + 25;
-    attack.posY = posY + 25;
+    idle.posY = posY;
+    walk.posY = posY;
+    death.posY = posY;
+    attack.posY = posY;
   }
   
   
   void render() {
     
-    healthBar.render(posX, posY - this.width/2);
     if (isSelected && !isOpening){
       attack.play();
       if (attack.currentIndex == attack.totalSize - 1) {
         isOpening = true;
       }
-      return;
-     } 
+     } else { 
+       idle.play();
+     }
+     healthBar.render(posX, posY - this.width/2);
      
-     idle.play();
   }
   
   void displayPortrait(int posX, int posY) {
-    image(portrait, posX, posY);
+    image(portrait, posX, posY + 25);
   }
   
   void select() {

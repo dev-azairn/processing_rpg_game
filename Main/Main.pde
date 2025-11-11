@@ -6,10 +6,10 @@ HashMap<String, Unit> units;
 HashMap<String, PImage> staticElements;
 CharacterBrowser characterBrowser;
 
-
+float aspectRatio = 16.0 / 9.0; // Example: 16:9 aspect ratio
 
 void setup() {
-  size(1600, 900);
+  size(800, 450);
   windowResizable(true);
   frameRate(24);
   manager = new FileManager("");
@@ -24,6 +24,21 @@ void draw() {
 
 void mousePressed() {
   characterBrowser.mousePressed();
+}
+
+void surfaceSizeChanged() {
+  float currentAspectRatio = (float)width / height;
+
+  if (currentAspectRatio > aspectRatio) {
+    // Window is wider than target aspect ratio, limit by height
+    int newWidth = (int)(height * aspectRatio);
+    surface.setSize(newWidth, height);
+  } else if (currentAspectRatio < aspectRatio) {
+    // Window is taller than target aspect ratio, limit by width
+    int newHeight = (int)(width / aspectRatio);
+    surface.setSize(width, newHeight);
+  }
+  // If currentAspectRatio == aspectRatio, no change needed
 }
 
 void rectGradient(int x, int y, int w, int h, color c1, color c2, float radianAngle, 
