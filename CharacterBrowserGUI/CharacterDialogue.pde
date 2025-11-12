@@ -16,6 +16,9 @@ class CharacterDialogue {
   int bubbleWidth = 220; 
   int bubbleHeight = 90;  
   int bubblePadding = 10;
+  
+  int lineStartTime;
+  final int LINE_DELAY = 1000; 
 
   CharacterDialogue(String jsonFilePath, HashMap<String, Unit> units) {
     allDialogueData = loadJSONObject(jsonFilePath);     
@@ -29,6 +32,7 @@ class CharacterDialogue {
   void startDialogue(String conversationID) {
     if (isActive) {
       println("Warning: Tried to start dialogue while one is already active.");
+      return; 
     }    
     currentConversation = allDialogueData.getJSONArray(conversationID);
     if (currentConversation == null) {
@@ -37,26 +41,26 @@ class CharacterDialogue {
     }
     currentLineIndex = 0;
     isActive = true;
-    displayNextLine();
+    displayNextLine(); 
   }
 
   void displayNextLine() {
-    if (currentLineIndex >= currentConversation.size()) {
+    if (currentConversation == null || currentLineIndex >= currentConversation.size()) {
       endDialogue();
       return;
     }
-    JSONObject lineData = currentConversation.getJSONObject(currentLineIndex);
-    String speakerName = lineData.getString("speaker", null);
-    String line = lineData.getString("line", null);    
-    if (speakerName != null && line != null) {
-      currentSpeaker = speakerName;
-      currentLine = line;
-      this.activeSpeakerUnit = allUnits.get(currentSpeaker);      
-      if (this.activeSpeakerUnit == null) {
-        println("ERROR: Dialogue speaker '" + currentSpeaker + "' not found in units map!");
+    JSONObject line = currentConversation.getJSONObject(currentLineIndex);
+    if (line != null) {
+      currentSpeaker = line.getString("speaker");
+      currentLine = line.getString("line");
+      
+      activeSpeakerUnit = allUnits.get(currentSpeaker);
+      if (activeSpeakerUnit == null) {
+        println("ERROR: Speaker '" + currentSpeaker + "' not found in units map!");
         endDialogue();
         return;
       }      
+      lineStartTime = millis();           
     } else {
       println("Skipping invalid line at index: " + currentLineIndex);
       currentLineIndex++;
@@ -73,40 +77,48 @@ class CharacterDialogue {
     currentSpeaker = "";
     currentLine = "";
     activeSpeakerUnit = null; 
+    lineStartTime = 0;
+  }
+
+  void update() {
+    if (!isActive) {
+      return;
+    }
+    if (millis() - lineStartTime > LINE_DELAY) {
+      displayNextLine();
+    }
   }
 
   void render() {
     if (!isActive || activeSpeakerUnit == null) {
       return; 
     }
+
     int bubbleX = activeSpeakerUnit.posX;
     int bubbleY = activeSpeakerUnit.posY - activeSpeakerUnit.width - (bubbleHeight / 2) - 10; // 10px above name
+
     pushStyle();    
     rectMode(CENTER);
+    
+    // Draw bubble
     fill(255);
     stroke(0); 
     strokeWeight(2);
     rect(bubbleX, bubbleY, bubbleWidth, bubbleHeight, 10); 
+    
+    // Draw triangle
     noStroke();
     fill(255);
     triangle(bubbleX - 10, bubbleY + bubbleHeight/2,
              bubbleX + 10, bubbleY + bubbleHeight/2,
              bubbleX, bubbleY + bubbleHeight/2 + 10); 
+             
+    // Draw text
     fill(0); 
     textSize(14);
-    textAlign(LEFT, TOP);
-    text(currentLine,
-         bubbleX - bubbleWidth/2 + bubblePadding, 
-         bubbleY - bubbleHeight/2 + bubblePadding,
-         bubbleWidth - bubblePadding*2, 
-         bubbleHeight - bubblePadding*2);          
+    textAlign(CENTER, CENTER);
+    text(currentLine, bubbleX, bubbleY, bubbleWidth - bubblePadding, bubbleHeight - bubblePadding);
+    
     popStyle();
-  }
-
-  void mousePressed() {
-    if (!isActive) {
-      return; 
-    }
-    displayNextLine();
   }
 }

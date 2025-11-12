@@ -6,6 +6,7 @@ FileManager manager;
 HashMap<String, Unit> units;
 HashMap<String, PImage> staticElements;
 CharacterBrowser characterBrowser;
+CharacterDialogue characterDialogue; 
 
 float aspectRatio = 16.0 / 9.0; // Example: 16:9 aspect ratio
 
@@ -18,17 +19,39 @@ void setup() {
   manager = new FileManager("");
   manager.loadData();
   characterBrowser = new CharacterBrowser(units);
+  characterDialogue = new CharacterDialogue("data/Dialogue/config.json", units);
 }
 
 void draw() {
   background(255);
   
   characterBrowser.renderGUI();
+  characterDialogue.update(); 
+  characterDialogue.render();
 }
 
 
-void mousePressed() {
+void mousePressed() { 
+  if (characterDialogue.isActive) {
+    return; 
+  }
   characterBrowser.mousePressed();
+  Unit unit1 = characterBrowser.selectedUnit[0];
+  Unit unit2 = characterBrowser.selectedUnit[1];  
+  if (unit1 != null && unit2 != null) {    
+    String name1 = unit1.detail.getName().toLowerCase().replace(" rpg", "");
+    String name2 = unit2.detail.getName().toLowerCase().replace(" rpg", "");
+    String sceneID = "scene_" + name1 + "_" + name2;    
+    if (!characterDialogue.isActive) { 
+      println("Checking for dialogue: " + sceneID);
+      characterDialogue.startDialogue(sceneID);
+      if (!characterDialogue.isActive) {
+         sceneID = "scene_" + name2 + "_" + name1;
+         println("Checking for dialogue: " + sceneID);
+         characterDialogue.startDialogue(sceneID);
+      }
+    }
+  }
 }
 
 void windowResized() {
@@ -95,32 +118,29 @@ class FileManager {
       this.baseDir = baseDir;
   }
   
-   void loadData() {
-    
+void loadData() {    
     String dataDir = "data";
-    JSONObject dataConfig = loadJSONObject(connectedPath(dataDir, "config.json"));
-    if (dataConfig != null) {
-      // Load unit by units
-      loadUnit(dataConfig.getJSONArray("units"), dataDir);
-      // Load elements from registered directory
+    JSONObject unitConfig = loadJSONObject(connectedPath(dataDir, "config.json"));    
+    JSONArray unitsArray = null;
+    if (unitConfig != null) {
+      unitsArray = unitConfig.getJSONArray("units");
+    } else {
+      println("ERROR: Could not load main unit config file 'data/config.json'");
     }
-    
-    // loadDLC
+    loadUnit(unitsArray, dataDir);
     if(isExist("DLC/config.json"))
     {
       println("Starting DLC implementation");
-      // Recursively run update for DLC configuration in every folder
     }
     
  }
   
-  private void loadUnit(JSONArray characterJson, String configDir){
-    
+  private void loadUnit(JSONArray characterJson, String configDir){    
+    units = new HashMap<>();    
       if (characterJson == null) {
         println("Cannot initialize json object");
         return;
       }
-      units = new HashMap<>();  
       for (int i = 0; i < characterJson.size(); i++) {
         JSONObject data = characterJson.getJSONObject(i);
         JSONObject detail = data.getJSONObject("detail");
