@@ -8,7 +8,7 @@ class HealthBar {
   private float skinWidth;
   private float skinHeight;
   
-  // health bar scale (default = 1)
+  // health bar scale 
   private float scale = 2;
   
   // health bar size
@@ -27,8 +27,8 @@ class HealthBar {
     skinWidth = healthBarSkin.width;
     skinHeight = healthBarSkin.height;
     
-    healthWidth = (skinWidth - 20) * scale;
-    healthHeight = (skinHeight - 22) * scale;
+    healthWidth = (skinWidth - 23.5) * scale;
+    healthHeight = (skinHeight - 15.5) * scale;
     
     this.maxHealth = maxHealth;
     this.currentHealth = maxHealth;
@@ -39,11 +39,11 @@ class HealthBar {
   public HealthBar(float maxHealth){
     imageFileName = "data/HealthBar/HealthBar.png";
     healthBarSkin = loadImage(imageFileName);
-    skinWidth = healthBarSkin.width;
+    skinWidth = healthBarSkin.width; 
     skinHeight = healthBarSkin.height;
     
-    healthWidth = (skinWidth - 20) * scale;
-    healthHeight = (skinHeight - 22) * scale;
+    healthWidth = (skinWidth - 23.5) * scale;
+    healthHeight = (skinHeight - 15.5) * scale;
     
     this.maxHealth = maxHealth;
     this.currentHealth = maxHealth;
@@ -75,21 +75,25 @@ class HealthBar {
   
   // render the health bar
   public void render(int spritePosX, int spritePosY){
+    
     // set health bar SKIN position
     int healthBarSkinPosX = spritePosX - 10;
     int healthBarSkinPosY = spritePosY - 35;
+    
+    // set health bar (RECTANGLE) position
+    float healthBarPosX = healthBarSkinPosX - (19 * scale);
+    float healthBarPosY = healthBarSkinPosY + (-2 * scale);
+    
+    //// render health bar 
+    rectMode(CORNER);
+    noStroke();
+    fill(184, 73, 73); // red (same color with hearth on health bar skin)
+    rect(healthBarPosX, healthBarPosY, (healthWidth * healthPercent), healthHeight);
+    
     // render health bar skin
     imageMode(CENTER);
     image(healthBarSkin, healthBarSkinPosX, healthBarSkinPosY, 
     skinWidth * scale, skinHeight * scale);
-    
-    // set health bar (RECTANGLE) position
-    float healthBarPosX = healthBarSkinPosX - (19 * scale);
-    float healthBarPosY = healthBarSkinPosY + (1 * scale);
-    // render health bar
-    rectMode(CORNER);
-    fill(255, 0, 0); // red
-    rect(healthBarPosX, healthBarPosY, (healthWidth * healthPercent), healthHeight);
   }
   
   public void loadConfig(String configFileName){
@@ -100,5 +104,7 @@ class HealthBar {
   
   public void setHealthBarScale(float scale){
     this.scale = scale;
+    healthWidth = (skinWidth - 23.5) * scale;
+    healthHeight = (skinHeight - 15.5) * scale;
   }
 }
