@@ -2,31 +2,41 @@ class CharacterDialogue {
 
   JSONObject allDialogueData; 
   JSONArray currentConversation;
-
   int currentLineIndex;
 
   boolean isActive = false; 
-  String currentSpeaker = "";
+  String currentSpeaker = ""; 
   String currentLine = "";
-  
-  CharacterDialogue(String jsonFilePath) {
+
+  HashMap<String, Unit> allUnits;
+
+  Unit activeSpeakerUnit = null; 
+
+  PFont dialogueFont;
+  int bubbleWidth = 220; 
+  int bubbleHeight = 90;  
+  int bubblePadding = 10;
+
+  CharacterDialogue(String jsonFilePath, HashMap<String, Unit> units) {
     allDialogueData = loadJSONObject(jsonFilePath);     
     if (allDialogueData == null) {
       println("ERROR: Could not load dialogue file: " + jsonFilePath);
       allDialogueData = new JSONObject(); 
     }
+    this.allUnits = units;
   }
 
   void startDialogue(String conversationID) {
+    if (isActive) {
+      println("Warning: Tried to start dialogue while one is already active.");
+    }    
     currentConversation = allDialogueData.getJSONArray(conversationID);
     if (currentConversation == null) {
       println("ERROR: Could not find conversation with ID: " + conversationID);
       return;
     }
-
     currentLineIndex = 0;
     isActive = true;
-    
     displayNextLine();
   }
 
@@ -35,23 +45,24 @@ class CharacterDialogue {
       endDialogue();
       return;
     }
-
     JSONObject lineData = currentConversation.getJSONObject(currentLineIndex);
-
-    String speaker = lineData.getString("speaker", null);
-    String line = lineData.getString("line", null);
-    
-    if (speaker != null && line != null) {
-      currentSpeaker = speaker;
+    String speakerName = lineData.getString("speaker", null);
+    String line = lineData.getString("line", null);    
+    if (speakerName != null && line != null) {
+      currentSpeaker = speakerName;
       currentLine = line;
-      
+      this.activeSpeakerUnit = allUnits.get(currentSpeaker);      
+      if (this.activeSpeakerUnit == null) {
+        println("ERROR: Dialogue speaker '" + currentSpeaker + "' not found in units map!");
+        endDialogue();
+        return;
+      }      
     } else {
       println("Skipping invalid line at index: " + currentLineIndex);
-      currentLineIndex++; 
-      displayNextLine();
+      currentLineIndex++;
+      displayNextLine(); 
       return;
     }
-
     currentLineIndex++;
   }
 
@@ -61,48 +72,41 @@ class CharacterDialogue {
     currentLineIndex = 0;
     currentSpeaker = "";
     currentLine = "";
+    activeSpeakerUnit = null; 
   }
 
   void render() {
-    if (!isActive) {
-      return;
+    if (!isActive || activeSpeakerUnit == null) {
+      return; 
     }
-
+    int bubbleX = activeSpeakerUnit.posX;
+    int bubbleY = activeSpeakerUnit.posY - activeSpeakerUnit.width - (bubbleHeight / 2) - 10; // 10px above name
+    pushStyle();    
     rectMode(CENTER);
-    rect(width / 2, height - 100, width - 50, 180);
-
-    // TODO: Set your speakerFont
-    // if (speakerFont != null) {
-    //   textFont(speakerFont);
-    // }
-    
-    fill(255, 200, 0); 
-    textSize(24);
-    textAlign(LEFT, TOP);
-    text(currentSpeaker, 50, height - 180);
-
-    // TODO: Set your dialogueFont
-    // if (dialogueFont != null) {
-    //   textFont(dialogueFont);
-    // }
-    
-    fill(255); 
-    textSize(18);
-    textAlign(LEFT, TOP);
-    // Wrap text within the box
-    text(currentLine, 50, height - 140, width - 100, 120);
-
-    fill(150);
+    fill(255);
+    stroke(0); 
+    strokeWeight(2);
+    rect(bubbleX, bubbleY, bubbleWidth, bubbleHeight, 10); 
+    noStroke();
+    fill(255);
+    triangle(bubbleX - 10, bubbleY + bubbleHeight/2,
+             bubbleX + 10, bubbleY + bubbleHeight/2,
+             bubbleX, bubbleY + bubbleHeight/2 + 10); 
+    fill(0); 
     textSize(14);
-    textAlign(RIGHT, BOTTOM);
-    text("Click to continue...", width - 50, height - 20);
+    textAlign(LEFT, TOP);
+    text(currentLine,
+         bubbleX - bubbleWidth/2 + bubblePadding, 
+         bubbleY - bubbleHeight/2 + bubblePadding,
+         bubbleWidth - bubblePadding*2, 
+         bubbleHeight - bubblePadding*2);          
+    popStyle();
   }
 
   void mousePressed() {
     if (!isActive) {
       return; 
     }
-
     displayNextLine();
   }
 }
