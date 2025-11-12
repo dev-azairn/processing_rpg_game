@@ -62,7 +62,7 @@ class Unit {
   // 2. Set the stroke thickness
      stroke(0);
      strokeWeight(4);
-     fill(255);
+     fill(0);
      textAlign(CENTER);
      textSize(16);
      text(detail.getName(), posX, posY - this.width);
@@ -88,6 +88,21 @@ class Unit {
     return isSelected;
   }
   
+  public String getName() {
+    return detail.getName();
+  }
+  
+  public float getAtk() {
+    return detail.getAtk();
+  }
+  
+  public float getHealth() {
+    return detail.getHealth();
+  }
+  
+  public String getDescription() {
+    return detail.getDescription();
+  }
   
   public String toString() {
      return "{ Name: " + detail.name + ", ATK:" + detail.atk + ", Health:" + detail.health + "}";

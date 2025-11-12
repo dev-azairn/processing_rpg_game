@@ -14,7 +14,6 @@ void setup() {
   pixelDensity(1);
   
   size(1280, 720);
-  windowResizable(true);
   frameRate(24);
   manager = new FileManager("");
   manager.loadData();
@@ -97,11 +96,6 @@ class FileManager {
   }
   
    void loadData() {
-    
-    if (!isExist("config.ini")) {
-      println("No configuration file!!!");
-      return;
-    }
     
     String dataDir = "data";
     JSONObject dataConfig = loadJSONObject(connectedPath(dataDir, "config.json"));
