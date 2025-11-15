@@ -1,7 +1,10 @@
 {
     "normal": [
         { "speaker": "Kiara", "line": "My sis is the best, don't you agree?!" },
-        { "speaker": "Kiara", "to": "Adira", "line": "Don’t worry, sis... I can handle myself. But you better not get hurt either!!"}
+        { "speaker": "Kiara", "line": "I'm training super hard! I'm going to be just as strong as my sis one day!" },
+        { "speaker": "Kiara", "line": "Ugh, standing around is so boring... I wonder what sis is doing." },
+        { "speaker": "Kiara", "line": "Did you see that move sis pulled in training? SO COOL!" },
+        { "speaker": "Kiara", "line": "I wonder if sis is watching? I've been practicing a new move!" }
       ],
     "taunt": [
         { "speaker": "Kiara", "line": "Huh? Did you just look at my sister without permission!? I’ll end you!" },

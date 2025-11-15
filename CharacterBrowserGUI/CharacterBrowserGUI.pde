@@ -7,18 +7,20 @@ HashMap<String, Unit> units;
 CharacterBrowser characterBrowser;
 CharacterDialogue characterDialogue; 
 
+Unit oldUnit1 = null;
+Unit oldUnit2 = null;
+
 float aspectRatio = 16.0 / 9.0; // Example: 16:9 aspect ratio
 
 
 void setup() {
-  pixelDensity(1);
-  
+  pixelDensity(1);  
   size(1280, 720);
   frameRate(24);
   manager = new FileManager("");
   manager.loadData();
   characterBrowser = new CharacterBrowser(units);
-  characterDialogue = new CharacterDialogue("data/Dialogue/config.json", units);
+  characterDialogue = new CharacterDialogue(units);
 }
 
 void draw() {
@@ -29,28 +31,38 @@ void draw() {
   characterDialogue.render();
 }
 
-
 void mousePressed() { 
   if (characterDialogue.isActive) {
     return; 
   }
   characterBrowser.mousePressed();
-  Unit unit1 = characterBrowser.selectedUnit[0];
-  Unit unit2 = characterBrowser.selectedUnit[1];  
-  if (unit1 != null && unit2 != null) {    
-    String name1 = unit1.detail.getName().toLowerCase().replace(" rpg", "");
-    String name2 = unit2.detail.getName().toLowerCase().replace(" rpg", "");
-    String sceneID = "scene_" + name1 + "_" + name2;    
-    if (!characterDialogue.isActive) { 
-      println("Checking for dialogue: " + sceneID);
-      characterDialogue.startDialogue(sceneID);
-      if (!characterDialogue.isActive) {
-         sceneID = "scene_" + name2 + "_" + name1;
-         println("Checking for dialogue: " + sceneID);
-         characterDialogue.startDialogue(sceneID);
-      }
+  Unit newUnit1 = characterBrowser.selectedUnit[0];
+  Unit newUnit2 = characterBrowser.selectedUnit[1];
+  if (newUnit1 != null && newUnit2 != null) {
+    if (newUnit1 != oldUnit1 || newUnit2 != oldUnit2) {
+      println("Checking for taunt: " + newUnit1.detail.getName() + " & " + newUnit2.detail.getName());
+      characterDialogue.startTauntDialogue(newUnit1, newUnit2);
     }
   }
+  else if (newUnit1 != null && newUnit2 == null) {
+    if (newUnit1 != oldUnit1) {
+      println("Checking for normal dialogue: " + newUnit1.detail.getName());
+      characterDialogue.startNormalDialogue(newUnit1);
+    }
+  }
+  else if (newUnit1 == null && newUnit2 != null) {
+     if (newUnit2 != oldUnit2) {
+      println("Checking for normal dialogue: " + newUnit2.detail.getName());
+      characterDialogue.startNormalDialogue(newUnit2);
+    }
+  }
+  else if (newUnit1 == null && newUnit2 == null) {
+    if (oldUnit1 != null || oldUnit2 != null) {
+      characterDialogue.endDialogue();
+    }
+  }
+  oldUnit1 = newUnit1;
+  oldUnit2 = newUnit2;
 }
 
 void windowResized() {
