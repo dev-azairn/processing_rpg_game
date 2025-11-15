@@ -9,7 +9,9 @@ CharacterBrowser characterBrowser;
 CharacterDialogue characterDialogue; 
 
 float aspectRatio = 16.0 / 9.0; // Example: 16:9 aspect ratio
-
+// Initialzie the SpriteConfigEditor
+SpriteConfigEditor spriteEditor;
+boolean isEditing = false;
 
 void setup() {
   pixelDensity(1);
@@ -20,6 +22,8 @@ void setup() {
   manager.loadData();
   characterBrowser = new CharacterBrowser(units);
   characterDialogue = new CharacterDialogue("data/Dialogue/config.json", units);
+   // SpriteEditor is referenced to CharacterBrowerGUI
+  spriteEditor = new SpriteConfigEditor();
 }
 
 void draw() {
@@ -28,8 +32,24 @@ void draw() {
   characterBrowser.renderGUI();
   characterDialogue.update(); 
   characterDialogue.render();
+    if (isEditing) {
+    spriteEditor.renderGUI();
+  }
+  
 }
 
+void keyPressed() {
+  if (key == 'e' || key == 'E') {
+    isEditing = !isEditing;
+    println("Editor Toggled: " + isEditing);
+    return;
+  }
+
+  if (isEditing) {
+    spriteEditor.keyPressed(key);
+  }
+
+}
 
 void mousePressed() { 
   if (characterDialogue.isActive) {
