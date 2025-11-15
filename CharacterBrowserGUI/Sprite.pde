@@ -116,4 +116,15 @@ class Sprite {
       }
     }
   }
+  
+  void setPlayOnce(boolean isPlayOnce) {
+    if(isPlayOnce)
+    {
+      isLoop = false;
+      currentIndex = 0;
+    } else {
+      isLoop = true;
+      currentIndex = 0;
+    }
+  }
 }

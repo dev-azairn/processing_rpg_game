@@ -1,10 +1,10 @@
 class CharacterBrowser {
-  HashMap<String, Unit> units;
   Unit[] selectedUnit; 
+  CharacterDialogue characterDialogue; 
   PImage background;
   PImage podium;
-  CharacterBrowser(HashMap<String, Unit> units) {
-    this.units = units;
+  float scrollOffset = 0;
+  CharacterBrowser() {
     selectedUnit = new Unit[2];
     background = loadImage("data/Podium/Scene.jpg");
   }
@@ -22,7 +22,7 @@ class CharacterBrowser {
       strokeWeight(2);
       rectMode(CORNER);
       fill(0,0,0,50);
-      rect(width-300, 100, 300, 200);
+      rect(width-300, 100, 300, 400);
       for (int i = 0; i < selectedUnit.length; i++) {
         
         if (selectedUnit[i] == null) {
@@ -30,66 +30,100 @@ class CharacterBrowser {
           strokeWeight(2);
           rectMode(CORNER);
           noFill();
-          rect(width-300, 100 + i*100, 300, 100);
+          rect(width-300, 100 + i*200, 300, 200);
           fill(255);
           textSize(16);
           textAlign(CENTER);
-          text("No selected character", width-150, 150 + i*100);
-          continue;
-        }
+          text("No selected character", width-150, 200 + i*200);
+          
+        } else {
          stroke(0);
          strokeWeight(2);
          fill(0,0,0,50);
          rectMode(CORNER);
-         rect(width-300, 100 + i*100, 300, 100);
+         rect(width-300, 100 + i*200, 300, 200);
          textAlign(CENTER);
          fill(255);
          textAlign(CENTER);
          textSize(20);
-         text(selectedUnit[i].getName(), width-150, 130 + i*100);
+         text(selectedUnit[i].getName(), width-150, 130 + i*200);
          fill(255);
          textAlign(LEFT);
          textSize(16);
-         text("Status:", width-275, 150 + i*100);
-         text("Health: " + selectedUnit[i].getHealth(), width-250, 175 + i*100);
-         text("ATK: " + selectedUnit[i].getAtk(), width-125, 175 + i*100);
-        selectedUnit[i].setPosition((i + 1)*100 + 300, (i)*100 + 350);
+         text("Status:", width-275, 150 + i*200);
+         text("Health: " + selectedUnit[i].getHealth(), width-250, 175 + i*200);
+         text("ATK: " + selectedUnit[i].getAtk(), width-125, 175 + i*200);
+         text("Action:", width-275, 225 + i*200);
+         
+         for (State state: State.values()) {
+           rectMode(CENTER);
+           fill(255);
+           stroke(0);
+           strokeWeight(2);
+           rect(width-235 + 60*state.ordinal(), 255 + i*200, 50, 25, 10);
+           fill(0);
+           String text;
+           switch (state) {
+             case IDLE:
+               text = "IDLE";
+               break;
+             case WALK:
+               text = "WALK";
+               break;
+             case ATTACK:
+               text = "ATTACK";
+               break;
+             case DEATH:
+               text = "DEATH";
+               break;
+             default:
+               text = "NO";
+           }
+           textAlign(CENTER);
+           textSize(12);
+           text(text,width-235 + 60*state.ordinal(), 258 + i*200);
+          
+         } 
         selectedUnit[i].render();
-        
+        }
       
      }
     
     
-    // Status List
-    
-    // Border
-    
-    
-    // Character Text
-     
-    
     // List Character
     rectMode(CORNER);
     fill(0,0,0,50);
-    strokeWeight(2);
+    stroke(0);
+    strokeWeight(3);
     rect(0, height - 212.5, width, 212.5);
-    int i = 0;
-    for (String hkey: units.keySet()) {
-       Unit unit = units.get(hkey);
-       if (!unit.isSelected()) {
-         rectGradient(165*i + 100, height - 100, 150, 150, color(232,60, 145), color(255, 198, 157), PI/4, 5, color(0,0,0), 25, CENTER);
-       } else {
-         rectGradient(165*i + 100, height - 100, 150, 150, color(150,60, 145), color(150, 198, 157), PI/4, 5, color(0,0,0), 25, CENTER);
-       }
-       unit.displayPortrait(165*i + 100, height - 100);
-       fill(255);
-       text(hkey, 165*i + 100, height - 100);
-       i++;
-    }
     
+  
+  int i = 0;
+  for (String hkey : units.keySet()) {
+    Unit unit = units.get(hkey);
     
    
-    // Scroll-Bar
+    int x = 165 * i + 100 + (int) scrollOffset;
+    int y = height - 100;
+    
+    if (!unit.isSelected()) {
+      rectGradient(x, y, 150, 150, color(232, 60, 145), color(255, 198, 157), PI / 4, 5, color(0, 0, 0), 25, CENTER);
+    } else {
+      rectGradient(x, y, 150, 150, color(150, 60, 145), color(150, 198, 157), PI / 4, 5, color(0, 0, 0), 25, CENTER);
+    }
+    unit.displayPortrait(x, y);
+    textSize(16);
+    fill(255);
+    text(hkey, x, y);
+    i++;
+  }
+    // Scrolling Bar
+    
+    fill(255);
+    strokeWeight(2);
+    stroke(150);
+    rectMode(CORNER);
+    rect(20 - scrollOffset * width/(units.size()*165 + 100), height-12, width * width/(units.size()*165 + 100), 7, 10);
     
   }
   
@@ -97,9 +131,12 @@ class CharacterBrowser {
    // Left-click : select unit-1
      int i = 0;
      for (String hkey: units.keySet()) {
-       println(hkey, i);
        Unit unit = units.get(hkey);
-       if (mouseX >= 165*i + 100 - 150/2 && 165*i + 100 + 150/2 >= mouseX
+       float xBoundLeft = 165*i + 100 - 150/2 + scrollOffset;
+       float xBoundRight = 165*i + 100 + 150/2 + scrollOffset;
+        println(xBoundLeft, xBoundRight);
+       
+       if (mouseX >= xBoundLeft && xBoundRight >= mouseX
        && mouseY >= height - 100 - 150/2 && height - 100 + 150/2 >= mouseY) { 
          if (mouseButton == LEFT) {
            if (selectedUnit[0] == unit) {
@@ -111,6 +148,7 @@ class CharacterBrowser {
            if(selectedUnit[0] != null) selectedUnit[0].unselect();
            unit.select();
            selectedUnit[0] = unit;
+           selectedUnit[0].setPosition(350, 350);
            println("Selected:" + unit);
          } else if (mouseButton == RIGHT) {
            if (selectedUnit[1] == unit) {
@@ -122,17 +160,41 @@ class CharacterBrowser {
            if(selectedUnit[1] != null) selectedUnit[1].unselect();
            unit.select();
            selectedUnit[1] = unit;
+           selectedUnit[1].setPosition(450, 450);
            println("Selected:" + unit);
          }
        }
        i++;
      }
+     
+     for (int j = 0; j < selectedUnit.length; j++) {
+       for (State state: State.values())
+       {
+            if (mouseX >= width-245 + 60*state.ordinal() && mouseX <= width-245 + 50*(state.ordinal()+1)
+           && mouseY >= 240 + j*200 && mouseY <= 240 + j*200 + 25) {
+             println("click");
+             Sprite anim = selectedUnit[j].getAnim(state);
+             if (state != State.IDLE) anim.setPlayOnce(true);
+             else anim.setPlayOnce(false);
+             selectedUnit[j].setState(state);
+             return;
+           }
+       }
+     } 
    }
-   // Right-click : select unit-2
   
   
-  void mouseWheel(){
-    
+  void mouseWheel(MouseEvent event) {
+
+  println(event);
+  if (mouseY > height - 212.5) {
+    float scrollAmount = event.getCount(); 
+    scrollOffset += scrollAmount * 20; 
+    println(scrollOffset);
+   
+    float maxScroll = (units.size() * 165) - width + 50; 
+    scrollOffset = constrain(scrollOffset, -maxScroll, 0);
   }
+}
   
 }

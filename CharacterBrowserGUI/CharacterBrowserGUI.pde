@@ -1,4 +1,5 @@
 // Main GUI
+
 import java.io.File;
 
 // Universal Constant
@@ -17,10 +18,17 @@ void setup() {
   pixelDensity(1);  
   size(1280, 720);
   frameRate(24);
+<<<<<<< Updated upstream
   manager = new FileManager("");
   manager.loadData();
   characterBrowser = new CharacterBrowser(units);
   characterDialogue = new CharacterDialogue(units);
+=======
+  manager = new FileManager();
+  manager.test();
+  characterBrowser = new CharacterBrowser();
+  characterDialogue = new CharacterDialogue("data/Dialogue/config.json", units);
+>>>>>>> Stashed changes
 }
 
 void draw() {
@@ -29,6 +37,7 @@ void draw() {
   characterBrowser.renderGUI();
   characterDialogue.update(); 
   characterDialogue.render();
+  
 }
 
 void mousePressed() { 
@@ -36,12 +45,29 @@ void mousePressed() {
     return; 
   }
   characterBrowser.mousePressed();
+<<<<<<< Updated upstream
   Unit newUnit1 = characterBrowser.selectedUnit[0];
   Unit newUnit2 = characterBrowser.selectedUnit[1];
   if (newUnit1 != null && newUnit2 != null) {
     if (newUnit1 != oldUnit1 || newUnit2 != oldUnit2) {
       println("Checking for taunt: " + newUnit1.detail.getName() + " & " + newUnit2.detail.getName());
       characterDialogue.startTauntDialogue(newUnit1, newUnit2);
+=======
+  Unit unit1 = characterBrowser.selectedUnit[0];
+  Unit unit2 = characterBrowser.selectedUnit[1];  
+  if (unit1 != null && unit2 != null) {    
+    String name1 = unit1.detail.getName().toLowerCase().replace(" rpg", "");
+    String name2 = unit2.detail.getName().toLowerCase().replace(" rpg", "");
+    String sceneID = "scene_" + name1 + "_" + name2;    
+    if (!characterDialogue.isActive) { 
+      println("Checking for dialogue: " + sceneID);
+      characterDialogue.startNormalDialogue(sceneID);
+      if (!characterDialogue.isActive) {
+         sceneID = "scene_" + name2 + "_" + name1;
+         println("Checking for dialogue: " + sceneID);
+         characterDialogue.startNormalDialogue(sceneID);
+      }
+>>>>>>> Stashed changes
     }
   }
   else if (newUnit1 != null && newUnit2 == null) {
@@ -65,13 +91,8 @@ void mousePressed() {
   oldUnit2 = newUnit2;
 }
 
-void windowResized() {
-  if(width < 1280) {
-    windowResize(800, height);
-  } 
-  if (height < 720) {
-    windowResize(width, 450);
-  }
+void mouseWheel(MouseEvent event){
+  characterBrowser.mouseWheel(event);
 }
 
 void rectGradient(int x, int y, int w, int h, color c1, color c2, float radianAngle, 
@@ -117,4 +138,8 @@ int strokeWidth, color strokeColor, int borderRadius, int rectMode) {
   strokeWeight(strokeWidth);
   stroke(strokeColor);
   rect(x, y, w, h, borderRadius);  
+}
+
+void pauseItem() {
+  
 }

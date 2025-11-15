@@ -1,6 +1,8 @@
+
+enum State{IDLE, WALK, ATTACK, DEATH};
 class Unit {
-  UnitDetail detail;
   HealthBar healthBar;
+  UnitDetail detail;
   Sprite idle;
   Sprite death;
   Sprite walk;
@@ -10,18 +12,19 @@ class Unit {
   PImage portrait;
   int posX;
   int posY;
-  
   int width;
   int height;
-  
-  
-  Unit(JSONObject detail, String idleConfig, String attackConfig, String deathConfig, String walkConfig, String healthBarConfig) {
+  State state;
+  CharacterDialogue dialogue;
+  int lastTime;
+  boolean setTime;
+  Unit(JSONObject detail, String idleConfig, String attackConfig, String walkConfig, String deathConfig, String healthBarConfig) {
      this.detail = new UnitDetail(detail.getString("name"), detail.getString("description"), detail.getFloat("health"), detail.getFloat("atk"));  
      this.idle = new Sprite(idleConfig);
      this.attack = new Sprite(attackConfig);
      this.walk = new Sprite(walkConfig);
      this.death = new Sprite(deathConfig);
-     this.healthBar = new HealthBar(detail.getFloat("health"));
+     this.healthBar = new HealthBar(healthBarConfig, this.detail.getHealth());
      idle.loadImageData();
      attack.loadImageData();
      walk.loadImageData();
@@ -30,7 +33,7 @@ class Unit {
      this.width = portrait.width ;
      this.height = portrait.height;
      portrait.resize(portrait.width*idle.spriteScale, portrait.height*idle.spriteScale);
-     
+     state = State.IDLE;
   }
   
   void setPosition(int posX, int posY) {
@@ -46,17 +49,14 @@ class Unit {
     attack.posY = posY;
   }
   
+  void setState(State state){
+    this.state = state;
+  }
   
   void render() {
+     
+    doAction();
     
-    if (isSelected && !isOpening){
-      attack.play();
-      if (attack.currentIndex == attack.totalSize - 1) {
-        isOpening = true;
-      }
-     } else { 
-       idle.play();
-     }
      
   
   // 2. Set the stroke thickness
@@ -70,18 +70,79 @@ class Unit {
      
   }
   
+  Sprite getAnim(State state){
+    switch (state) {
+      case IDLE:
+        return idle;
+      case ATTACK:
+        return attack;
+      case WALK:
+        return walk;
+      case DEATH:
+        return death;
+      default:
+        return null;
+    }
+  }
+  
+  void doAction() {
+    switch (state) {
+      case IDLE:
+        idle.play();
+        break;
+      case WALK:
+        walk.play();
+        if (walk.currentIndex >= walk.totalSize - 1) setIdle();
+        break;
+      case ATTACK:
+        attack.play();
+        if (attack.currentIndex >= attack.totalSize - 1) setIdle();
+        if (!isOpening) isOpening = true;
+        break;
+      case DEATH:
+        death.play();
+        
+        if(!setTime) {
+          setTime = true;
+          lastTime = millis();
+        }
+        if (death.currentIndex >= death.totalSize - 1) if (millis() > lastTime + 3000 && setTime) {
+          setTime = false;
+          setIdle();
+        }
+        break;
+    }
+  }
+  
   void displayPortrait(int posX, int posY) {
     image(portrait, posX, posY + 25);
   }
   
   void select() {
     isSelected = true;
+    setAttack();
   }
   
   
   void unselect() {
     isSelected = false;
     isOpening = false;
+  }
+  
+  void setIdle() {
+    this.state = State.IDLE;
+  }
+  
+  void setAttack() {
+    this.state = State.ATTACK;
+  }
+  
+  void setWalk() {
+    this.state = State.WALK;
+  }
+  
+  void setDeath() {
+    this.state = State.DEATH;
   }
   
   boolean isSelected() {
@@ -184,7 +245,6 @@ class HealthBar {
   // constructor - by loadConfig()
   public HealthBar(String configFileName, float maxHealth){
     loadConfig(configFileName);
-    healthBarSkin = loadImage(imageFileName);
     skinWidth = healthBarSkin.width;
     skinHeight = healthBarSkin.height;
     
@@ -250,7 +310,10 @@ class HealthBar {
     noStroke();
     fill(184, 73, 73); // red (same color with hearth on health bar skin)
     rect(healthBarPosX, healthBarPosY, (healthWidth * healthPercent), healthHeight);
-    
+    textMode(CENTER);
+    textSize(10);
+    fill(255);
+    text(healthPercent*100 + "%", (healthBarPosX + (healthWidth * healthPercent)/2), (healthBarPosY + (healthHeight + 5)/2));
     // render health bar skin
     imageMode(CENTER);
     image(healthBarSkin, healthBarSkinPosX, healthBarSkinPosY, 
@@ -260,7 +323,11 @@ class HealthBar {
   public void loadConfig(String configFileName){
     String[] StringLines = loadStrings(configFileName);
     String[] configParams = split(StringLines[0], " ");
-    imageFileName = configParams[0];
+    String skinFolder = configParams[0];
+    String skinFile = configParams[1];
+    this.scale = int(configParams[2]);
+    imageFileName = "data/" + skinFolder + "/" + skinFile;
+    healthBarSkin = loadImage(imageFileName);
   }
   
   public void setHealthBarScale(float scale){

@@ -3,48 +3,71 @@ class FileManager {
    
   boolean containsDLC;
   
-  FileManager(String baseDir) {
+  FileManager() {
       this.baseDir = baseDir;
   }
   
-void loadData() {    
-    String dataDir = "data";
-    JSONObject unitConfig = loadJSONObject(connectedPath(dataDir, "config.json"));    
-    JSONArray unitsArray = null;
-    if (unitConfig != null) {
-      unitsArray = unitConfig.getJSONArray("units");
-    } else {
-      println("ERROR: Could not load main unit config file 'data/config.json'");
+  void test() {
+    String dataDirectoryPath = sketchPath("data");
+    File directory = new File(dataDirectoryPath);
+    println(directory.getName());
+    File[] files = directory.listFiles();
+    if (files != null)
+    for (File file: files) {
+      if (!file.isFile()) continue;
+      String fileName = file.getName(); 
+      int extensionIndex = fileName.indexOf('.');
+      println(fileName);
+      if (fileName.startsWith("Unit")) {
+        loadUnitData(dataDirectoryPath, fileName);
+        loadDialogueData(dataDirectoryPath, "Dialogue_" + fileName.substring(5, extensionIndex) + ".json");
+      }
+      else if (fileName.startsWith("Scene")) loadSceneData(dataDirectoryPath, fileName);
+       
     }
-    loadUnit(unitsArray, dataDir);
-    if(isExist("DLC/config.json"))
-    {
-      println("Starting DLC implementation");
-    }
+    String dlcPath = sketchPath("DLC");
     
- }
-  
-  private void loadUnit(JSONArray characterJson, String configDir){    
-    units = new HashMap<>();    
-      if (characterJson == null) {
+  }
+
+ 
+  private void loadUnitData(String configDir, String fileName) {
+    if (units == null) units = new HashMap<>();  
+    String healthBarConfigPath = connectedPath(configDir, "HealthBar.txt");
+    println(healthBarConfigPath);
+    if (!isExist(healthBarConfigPath)) {
+      println("No healthbar config");
+      exit();
+    }
+    JSONObject data = loadJSONObject(connectedPath(configDir, fileName));
+    if (data == null) {
         println("Cannot initialize json object");
         return;
-      }
-      for (int i = 0; i < characterJson.size(); i++) {
-        JSONObject data = characterJson.getJSONObject(i);
-        JSONObject detail = data.getJSONObject("detail");
-        Unit unit = new Unit(detail, 
+     }
+     JSONObject detail = data.getJSONObject("detail");
+     Unit unit = new Unit(detail, 
           connectedPath(configDir, data.getString("idleConfig")), 
           connectedPath(configDir, data.getString("attackConfig")), 
           connectedPath(configDir, data.getString("walkConfig")), 
           connectedPath(configDir, data.getString("deathConfig")),
-          connectedPath(configDir + "/HealthBar", "config.ini"));
-        units.put(detail.getString("name"), unit);
+          healthBarConfigPath);
+     units.put(detail.getString("name"), unit);
         
         // Test
-        println(units.get(detail.get("name")));
-      }
+     println(units.get(detail.get("name")));
+     
   }
+  
+  private void loadSceneData(String configDir, String fileName) {
+    
+  }
+  
+  private void loadDialogueData(String configDir, String fileName){
+    println(fileName);
+    if(!isExist(connectedPath(configDir, fileName))) println("No file read");
+    characterDialogue = new CharacterDialogue("data/Dialogue/config.json", units);
+  }
+  
+  
   
   private void loadElements(JSONArray elements, String configDir, String element) {
     

@@ -9,5 +9,6 @@
     "idleConfig": "Archer_Idle.txt",
     "attackConfig": "Archer_Attack.txt",
     "walkConfig": "Archer_Walk.txt",
-    "deathConfig": "Archer_Death.txt"
+    "deathConfig": "Archer_Death.txt",
+    "dialouge" : ""
 }
