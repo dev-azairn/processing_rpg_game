@@ -1,0 +1,13 @@
+{
+    "detail": {
+    "name": "Adira",
+    "health": 150,
+    "atk": 20,
+    "def": 20,
+    "description": "She is a commander of Templar and known as the strongest woman in the world."
+    },
+    "idleConfig": "Knight_Templar_Idle.txt",
+    "attackConfig": "Knight_Templar_Attack.txt",
+    "walkConfig": "Knight_Templar_Walk.txt",
+    "deathConfig": "Knight_Templar_Death.txt"
+}

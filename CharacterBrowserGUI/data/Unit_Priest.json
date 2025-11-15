@@ -1,0 +1,13 @@
+{
+    "detail": {
+    "name": "Mary",
+    "health": 100,
+    "atk": 8,
+    "def": 12,
+    "description": "An orphan who grew up in a church. She developed an understanding of the world and religion there."
+    },
+    "idleConfig": "Priest_Idle.txt",
+    "attackConfig": "Priest_Attack.txt",
+    "walkConfig": "Priest_Walk.txt",
+    "deathConfig": "Priest_Death.txt"
+}
