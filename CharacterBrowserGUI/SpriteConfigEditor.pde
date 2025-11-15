@@ -28,7 +28,7 @@ class SpriteConfigEditor {
     displayConfig();
     fill(50);
 
-    text("1. Press 'A' to Simulate new Run Config data.", 10, height - 3 * LINE_HEIGHT);
+    text("1. Press 'A' to Simulate new Action Config data.", 10, height - 3 * LINE_HEIGHT);
     text("2. Press 'S' to Save Config", 10, height - 2 * LINE_HEIGHT);
     text("3. Press 'E' to Exit Editor.", 10, height - 1 * LINE_HEIGHT);
   }
