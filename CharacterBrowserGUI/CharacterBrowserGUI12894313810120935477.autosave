@@ -22,20 +22,21 @@ void setup() {
   manager.loadData();
   characterBrowser = new CharacterBrowser(units);
   characterDialogue = new CharacterDialogue("data/Dialogue/config.json", units);
-   // SpriteEditor is referenced to CharacterBrowerGUI
+  
+ // SpriteEditor is referenced to CharacterBrowerGUI
   spriteEditor = new SpriteConfigEditor();
 }
 
 void draw() {
+
   background(255);
-  
   characterBrowser.renderGUI();
   characterDialogue.update(); 
   characterDialogue.render();
-    if (isEditing) {
+  if (isEditing) {
     spriteEditor.renderGUI();
   }
-  
+
 }
 
 void keyPressed() {
@@ -55,18 +56,19 @@ void mousePressed() {
   if (characterDialogue.isActive) {
     return; 
   }
-   characterBrowser.mousePressed();
+    characterBrowser.mousePressed();
   
   Unit unit1 = characterBrowser.selectedUnit[0];
   Unit unit2 = characterBrowser.selectedUnit[1]; 
-
-  if (unit1 != null && unit2 != null) { 
+  
+  if (unit1 != null && unit2 != null) {     
     String name1 = unit1.detail.getName().toLowerCase().replace(" rpg", "");
     String name2 = unit2.detail.getName().toLowerCase().replace(" rpg", "");
 
     println("Attempting interaction dialogue between: " + name1 + " and " + name2);
     characterDialogue.startInteractionDialogue(name1, name2);
   }
+  
 }
 
 void windowResized() {
