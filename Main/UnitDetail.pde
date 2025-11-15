@@ -1,47 +1,48 @@
 class UnitDetail {
-  private String name;
-  private String description;
-  private Float health;
-  private Float atk;
+
+String name;
+  String description;
+  float health;
+  float atk;
    
-  public UnitDetail(String name, String description, Float health, Float atk){
+  UnitDetail(String name, String description, float health, float atk){
     this.name = name;
     this.description = description;
     this.health = health;
     this.atk = atk;
   }
   
-    // Getters
-    public String getName() {
-        return name;
-    }
+  // Getters
+  String getName() {
+    return name;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  String getDescription() {
+    return description;
+  }
 
-    public float getHealth() {
-        return health;
-    }
+  float getHealth() {
+    return health;
+  }
 
-    public float getAtk() {
-        return atk;
-    }
+  float getAtk() {
+    return atk;
+  }
 
-    // Setters
-    public void setName(String name) {
-        this.name = name;
-    }
+  // Setters
+  void setName(String name) {
+    this.name = name;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  void setDescription(String description) {
+    this.description = description;
+  }
 
-    public void setHealth(float health) {
-        this.health = health;
-    }
+  void setHealth(float health) {
+    this.health = health;
+  }
 
-    public void setAtk(float atk) {
-        this.atk = atk;
-    }  
+  void setAtk(float atk) {
+    this.atk = atk;
+  }  
 }
