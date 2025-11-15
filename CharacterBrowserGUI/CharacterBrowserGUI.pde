@@ -1,5 +1,4 @@
 // Main GUI
-
 import java.io.File;
 
 // Universal Constant
@@ -18,17 +17,10 @@ void setup() {
   pixelDensity(1);  
   size(1280, 720);
   frameRate(24);
-<<<<<<< Updated upstream
-  manager = new FileManager("");
-  manager.loadData();
-  characterBrowser = new CharacterBrowser(units);
-  characterDialogue = new CharacterDialogue(units);
-=======
   manager = new FileManager();
   manager.test();
   characterBrowser = new CharacterBrowser();
-  characterDialogue = new CharacterDialogue("data/Dialogue/config.json", units);
->>>>>>> Stashed changes
+  characterDialogue = new CharacterDialogue(units);
 }
 
 void draw() {
@@ -37,61 +29,43 @@ void draw() {
   characterBrowser.renderGUI();
   characterDialogue.update(); 
   characterDialogue.render();
-  
 }
 
 void mousePressed() { 
-  if (characterDialogue.isActive) {
-    return; 
-  }
+  //if (characterDialogue.isActive) {
+  //  return; 
+  //}
   characterBrowser.mousePressed();
-<<<<<<< Updated upstream
-  Unit newUnit1 = characterBrowser.selectedUnit[0];
-  Unit newUnit2 = characterBrowser.selectedUnit[1];
-  if (newUnit1 != null && newUnit2 != null) {
-    if (newUnit1 != oldUnit1 || newUnit2 != oldUnit2) {
-      println("Checking for taunt: " + newUnit1.detail.getName() + " & " + newUnit2.detail.getName());
-      characterDialogue.startTauntDialogue(newUnit1, newUnit2);
-=======
-  Unit unit1 = characterBrowser.selectedUnit[0];
-  Unit unit2 = characterBrowser.selectedUnit[1];  
-  if (unit1 != null && unit2 != null) {    
-    String name1 = unit1.detail.getName().toLowerCase().replace(" rpg", "");
-    String name2 = unit2.detail.getName().toLowerCase().replace(" rpg", "");
-    String sceneID = "scene_" + name1 + "_" + name2;    
-    if (!characterDialogue.isActive) { 
-      println("Checking for dialogue: " + sceneID);
-      characterDialogue.startNormalDialogue(sceneID);
-      if (!characterDialogue.isActive) {
-         sceneID = "scene_" + name2 + "_" + name1;
-         println("Checking for dialogue: " + sceneID);
-         characterDialogue.startNormalDialogue(sceneID);
-      }
->>>>>>> Stashed changes
-    }
-  }
-  else if (newUnit1 != null && newUnit2 == null) {
-    if (newUnit1 != oldUnit1) {
-      println("Checking for normal dialogue: " + newUnit1.detail.getName());
-      characterDialogue.startNormalDialogue(newUnit1);
-    }
-  }
-  else if (newUnit1 == null && newUnit2 != null) {
-     if (newUnit2 != oldUnit2) {
-      println("Checking for normal dialogue: " + newUnit2.detail.getName());
-      characterDialogue.startNormalDialogue(newUnit2);
-    }
-  }
-  else if (newUnit1 == null && newUnit2 == null) {
-    if (oldUnit1 != null || oldUnit2 != null) {
-      characterDialogue.endDialogue();
-    }
-  }
-  oldUnit1 = newUnit1;
-  oldUnit2 = newUnit2;
+  //Unit newUnit1 = characterBrowser.selectedUnit[0];
+  //Unit newUnit2 = characterBrowser.selectedUnit[1];
+  //if (newUnit1 != null && newUnit2 != null) {
+  //  if (newUnit1 != oldUnit1 || newUnit2 != oldUnit2) {
+  //    println("Checking for taunt: " + newUnit1.detail.getName() + " & " + newUnit2.detail.getName());
+  //    characterDialogue.startTauntDialogue(newUnit1, newUnit2);
+  //  }
+  //}
+  //else if (newUnit1 != null && newUnit2 == null) {
+  //  if (newUnit1 != oldUnit1) {
+  //    println("Checking for normal dialogue: " + newUnit1.detail.getName());
+  //    characterDialogue.startNormalDialogue(newUnit1);
+  //  }
+  //}
+  //else if (newUnit1 == null && newUnit2 != null) {
+  //   if (newUnit2 != oldUnit2) {
+  //    println("Checking for normal dialogue: " + newUnit2.detail.getName());
+  //    characterDialogue.startNormalDialogue(newUnit2);
+  //  }
+  //}
+  //else if (newUnit1 == null && newUnit2 == null) {
+  //  if (oldUnit1 != null || oldUnit2 != null) {
+  //    characterDialogue.endDialogue();
+  //  }
+  //}
+  //oldUnit1 = newUnit1;
+  //oldUnit2 = newUnit2;
 }
 
-void mouseWheel(MouseEvent event){
+void mouseWheel(MouseEvent event) {
   characterBrowser.mouseWheel(event);
 }
 
@@ -138,8 +112,4 @@ int strokeWidth, color strokeColor, int borderRadius, int rectMode) {
   strokeWeight(strokeWidth);
   stroke(strokeColor);
   rect(x, y, w, h, borderRadius);  
-}
-
-void pauseItem() {
-  
 }

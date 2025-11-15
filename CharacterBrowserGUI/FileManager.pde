@@ -1,10 +1,10 @@
 class FileManager {
-  private String baseDir;
+ 
    
   boolean containsDLC;
   
   FileManager() {
-      this.baseDir = baseDir;
+      
   }
   
   void test() {
@@ -64,7 +64,6 @@ class FileManager {
   private void loadDialogueData(String configDir, String fileName){
     println(fileName);
     if(!isExist(connectedPath(configDir, fileName))) println("No file read");
-    characterDialogue = new CharacterDialogue("data/Dialogue/config.json", units);
   }
   
   
