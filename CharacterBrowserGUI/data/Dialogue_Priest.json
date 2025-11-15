@@ -1,0 +1,10 @@
+{
+    "normal": [
+        { "speaker": "Mary", "line": "If my power is a compass, then I am a guide." }
+      ],
+    "taunt": [
+        { "speaker": "Mary", "line": "I don't wish to harm you, this is an atonement..." },
+        { "speaker": "Mary", "line": "I offer this to you as a reconciliation..." },
+        { "speaker": "Mary", "line": "Please accept this as my effort to compensate for your wrongs..." }
+      ]
+}

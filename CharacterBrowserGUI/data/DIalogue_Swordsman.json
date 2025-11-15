@@ -1,0 +1,10 @@
+{
+    "normal": [
+        { "speaker": "John RPG", "line": "My name is John... RPG is just what people called me." }
+      ],
+    "taunt": [
+        { "speaker": "John RPG", "line": "I don't know who you are. Well... I don't even know who I am." },
+        { "speaker": "John RPG", "line": "They called me a hero for a reason, so brace yourself!" },
+        { "speaker": "John RPG", "line": "Look, I don’t even know how I got here, but you for sure don't wanna mess with me!" }
+      ]
+}

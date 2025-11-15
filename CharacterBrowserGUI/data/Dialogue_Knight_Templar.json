@@ -1,0 +1,12 @@
+{
+    "normal": [
+        { "speaker": "Adira", "line": "I'm Adira of Templar. I'll never stop until there are no enemies left." },
+        { "speaker": "Adira", "to": "Kiara", "line": "Kiara, stay close. I don’t want anything happening to you out there."}
+      ],
+    "taunt": [
+        { "speaker": "Adira", "line": "Don't you dare stand in my path." },
+        { "speaker": "Adira", "line": "This will be your last mistake." },
+        { "speaker": "Adira", "line": "Move aside, or prepare to face your death." },
+        { "speaker": "Adira", "to": "Kiara", "line": "Step aside, Kiara. You don’t need to fight me to prove anything."}
+      ]
+}

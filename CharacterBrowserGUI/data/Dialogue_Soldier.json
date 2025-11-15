@@ -1,0 +1,10 @@
+{
+    "normal": [
+        { "speaker": "Luke", "line": "My name is Luke! I'm glad I can help you!" }
+      ],
+    "taunt": [
+        { "speaker": "Luke", "line": "It's not too late to do a good thing!" },
+        { "speaker": "Luke", "line": "You can still change!" },
+        { "speaker": "Luke", "line": "I'll make you stop those evil acts!" }
+      ]
+}

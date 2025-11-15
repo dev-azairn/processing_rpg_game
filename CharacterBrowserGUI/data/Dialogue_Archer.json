@@ -1,0 +1,10 @@
+{
+    "normal": [
+        { "speaker": "Timmie", "line": "I am no one... just left me alone." }
+      ],
+    "taunt": [
+        { "speaker": "Timmie", "line": "Step on the wood... and you will never be found." },
+        { "speaker": "Timmie", "line": "The forest is my domain, you are now under my shadow." },
+        { "speaker": "Timmie", "line": "I know your weakness…and when I strike, you’ll never see it coming!" }
+      ]
+}

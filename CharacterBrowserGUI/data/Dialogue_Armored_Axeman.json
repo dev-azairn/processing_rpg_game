@@ -1,0 +1,10 @@
+{
+    "normal": [
+        { "speaker": "Cole", "line": "N-N-Nice to meet you. I'm...Cole." }
+      ],
+    "taunt": [
+        { "speaker": "Cole", "line": "P-Please don’t hit me... I’m just trying to survive here!" },
+        { "speaker": "Cole", "line": "I-I’m fully armored, so... I’ll be fine, right? Right...?" },
+        { "speaker": "Cole", "line": "This axe is so heavy... please don’t make me swing it!!" }
+      ]
+}

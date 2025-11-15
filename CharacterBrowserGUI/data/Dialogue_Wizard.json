@@ -1,0 +1,10 @@
+{
+    "normal": [
+        { "speaker": "Lily", "line": "My power is my responsibility, I will use it for rights." }
+      ],
+    "taunt": [
+        { "speaker": "Lily", "line": "All evils will perish." },
+        { "speaker": "Lily", "line": "The light will guide me to end this darkness." },
+        { "speaker": "Lily", "line": "I fight not for myself, but for the light of this world." }
+      ]
+}

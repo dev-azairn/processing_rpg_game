@@ -1,0 +1,10 @@
+{
+    "normal": [
+        { "speaker": "Land", "line": "I'm Land the Lancer. Call me anytime you need the help." }
+      ],
+    "taunt": [
+        { "speaker": "Land", "line": "Did you just call me Land without the Lancer? That's unforgivable." },
+        { "speaker": "Land", "line": "I became a lancer because it’s the path to true power... and horses are awesome." },
+        { "speaker": "Land", "line": "You won’t understand the weight of my name, this is my legacy!" }
+      ]
+}
