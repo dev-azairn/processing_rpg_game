@@ -16,8 +16,7 @@ class Unit {
   int height;
   State state;
   CharacterDialogue dialogue;
-  int lastTime;
-  boolean setTime;
+  int lastTime = millis();
   Unit(JSONObject detail, String idleConfig, String attackConfig, String walkConfig, String deathConfig, String healthBarConfig) {
      this.detail = new UnitDetail(detail.getString("name"), detail.getString("description"), detail.getFloat("health"), detail.getFloat("atk"));  
      this.idle = new Sprite(idleConfig);
@@ -101,13 +100,7 @@ class Unit {
         break;
       case DEATH:
         death.play();
-        
-        if(!setTime) {
-          setTime = true;
-          lastTime = millis();
-        }
-        if (death.currentIndex >= death.totalSize - 1) if (millis() > lastTime + 3000 && setTime) {
-          setTime = false;
+        if (death.currentIndex >= death.totalSize - 1) if (millis() > lastTime + 3000) {
           setIdle();
         }
         break;
@@ -143,6 +136,10 @@ class Unit {
   
   void setDeath() {
     this.state = State.DEATH;
+  }
+  
+  void setLastTime() {
+    this.lastTime = millis();
   }
   
   boolean isSelected() {
@@ -335,4 +332,5 @@ class HealthBar {
     healthWidth = (skinWidth - 23.5) * scale;
     healthHeight = (skinHeight - 15.5) * scale;
   }
+  
 }

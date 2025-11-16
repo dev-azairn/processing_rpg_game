@@ -20,49 +20,20 @@ void setup() {
   manager = new FileManager();
   manager.test();
   characterBrowser = new CharacterBrowser();
-  characterDialogue = new CharacterDialogue(units);
+  
 }
 
 void draw() {
   background(255);
   
   characterBrowser.renderGUI();
-  characterDialogue.update(); 
-  characterDialogue.render();
+  
 }
 
 void mousePressed() { 
-  if (characterDialogue.isActive) {
-    return; 
-  }
+  
   characterBrowser.mousePressed();
-  Unit newUnit1 = characterBrowser.selectedUnit[0];
-  Unit newUnit2 = characterBrowser.selectedUnit[1];
-  if (newUnit1 != null && newUnit2 != null) {
-    if (newUnit1 != oldUnit1 || newUnit2 != oldUnit2) {
-      println("Checking for taunt: " + newUnit1.detail.getName() + " & " + newUnit2.detail.getName());
-      characterDialogue.startTauntDialogue(newUnit1, newUnit2);
-    }
-  }
-  else if (newUnit1 != null && newUnit2 == null) {
-    if (newUnit1 != oldUnit1) {
-      println("Checking for normal dialogue: " + newUnit1.detail.getName());
-      characterDialogue.startNormalDialogue(newUnit1);
-    }
-  }
-  else if (newUnit1 == null && newUnit2 != null) {
-     if (newUnit2 != oldUnit2) {
-      println("Checking for normal dialogue: " + newUnit2.detail.getName());
-      characterDialogue.startNormalDialogue(newUnit2);
-    }
-  }
-  else if (newUnit1 == null && newUnit2 == null) {
-    if (oldUnit1 != null || oldUnit2 != null) {
-      characterDialogue.endDialogue();
-    }
-  }
-  oldUnit1 = newUnit1;
-  oldUnit2 = newUnit2;
+  
 }
 
 void mouseWheel(MouseEvent event) {

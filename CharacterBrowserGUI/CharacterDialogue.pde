@@ -193,4 +193,35 @@ class CharacterDialogue {
     text(currentLine, bubbleX, bubbleY, bubbleWidth - bubblePadding, bubbleHeight - bubblePadding);    
     popStyle();
   }
+  
+  
+  void mousePressed(Unit[] selectedUnit) {
+    
+     Unit newUnit1 = selectedUnit[0];
+    Unit newUnit2 = selectedUnit[1];
+
+    // Case 1: Two units are selected. Start a taunt.
+    if (newUnit1 != null && newUnit2 != null) {
+      println("Checking for taunt: " + newUnit1.detail.getName() + " & " + newUnit2.detail.getName());
+      startTauntDialogue(newUnit1, newUnit2);
+    }
+    // Case 2: Only the first unit is selected. Start normal dialogue.
+    else if (newUnit1 != null && newUnit2 == null) {
+      println("Checking for normal dialogue: " + newUnit1.detail.getName());
+      startNormalDialogue(newUnit1);
+    }
+    // Case 3: Only the second unit is selected. Start normal dialogue.
+    else if (newUnit1 == null && newUnit2 != null) {
+      println("Checking for normal dialogue: " + newUnit2.detail.getName());
+      startNormalDialogue(newUnit2);
+    }
+    // Case 4: Nothing is selected (clicked on empty space).
+    // End any dialogue that is currently active.
+    else if (newUnit1 == null && newUnit2 == null) {
+      if (isActive) {
+        endDialogue();
+      }
+    }
+  
+  }
 }

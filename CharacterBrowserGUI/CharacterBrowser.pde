@@ -7,6 +7,7 @@ class CharacterBrowser {
   CharacterBrowser() {
     selectedUnit = new Unit[2];
     background = loadImage("data/Podium/Scene.jpg");
+    characterDialogue = new CharacterDialogue(units);
   }
   
   
@@ -124,7 +125,8 @@ class CharacterBrowser {
     stroke(150);
     rectMode(CORNER);
     rect(20 - scrollOffset * width/(units.size()*165 + 100), height-12, width * width/(units.size()*165 + 100), 7, 10);
-    
+    characterDialogue.update(); 
+    characterDialogue.render();
   }
   
   void mousePressed() {
@@ -176,11 +178,15 @@ class CharacterBrowser {
              Sprite anim = selectedUnit[j].getAnim(state);
              if (state != State.IDLE) anim.setPlayOnce(true);
              else anim.setPlayOnce(false);
+             if (state == State.DEATH) selectedUnit[j].setLastTime();
              selectedUnit[j].setState(state);
              return;
            }
        }
-     } 
+     }
+     
+     characterDialogue.mousePressed(selectedUnit);
+     
    }
   
   
