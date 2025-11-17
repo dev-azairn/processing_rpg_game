@@ -18,7 +18,7 @@ class Unit {
   CharacterDialogue dialogue;
   int lastTime = millis();
   Unit(JSONObject detail, String idleConfig, String attackConfig, String walkConfig, String deathConfig, String healthBarConfig) {
-     this.detail = new UnitDetail(detail.getString("name"), detail.getString("description"), detail.getFloat("health"), detail.getFloat("atk"));  
+     this.detail = new UnitDetail(detail.getString("name"), detail.getString("description"), detail.getFloat("health"), detail.getFloat("atk"), detail.getFloat("def"));  
      this.idle = new Sprite(idleConfig);
      this.attack = new Sprite(attackConfig);
      this.walk = new Sprite(walkConfig);
@@ -172,12 +172,14 @@ class UnitDetail {
   private String description;
   private float health;
   private float atk;
-   
-  UnitDetail(String name, String description, float health, float atk){
+  private float def;
+  
+  UnitDetail(String name, String description, float health, float atk, float def){
     this.name = name;
     this.description = description;
     this.health = health;
     this.atk = atk;
+    this.def = def;
   }
   
     // Getters
@@ -196,6 +198,10 @@ class UnitDetail {
     public float getAtk() {
         return atk;
     }
+    
+    public float getDef() {
+      return def;
+    }
 
     // Setters
     public void setName(String name) {
@@ -213,6 +219,10 @@ class UnitDetail {
     public void setAtk(float atk) {
         this.atk = atk;
     }  
+    
+    public void setDef(float def) {
+        this.def = def;
+    } 
 
 }
 

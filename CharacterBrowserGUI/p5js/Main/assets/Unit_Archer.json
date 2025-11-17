@@ -1,0 +1,14 @@
+{
+    "detail": {
+    "name": "Timmie",
+    "health": 90,
+    "atk": 18,
+    "def": 6,
+    "description": "Grew up in a forest with hunters; he has strong survival and stealth skills."
+    },
+    "idleConfig": "Archer_Idle.txt",
+    "attackConfig": "Archer_Attack.txt",
+    "walkConfig": "Archer_Walk.txt",
+    "deathConfig": "Archer_Death.txt",
+    "dialouge" : ""
+}

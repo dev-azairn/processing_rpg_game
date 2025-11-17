@@ -1,0 +1,13 @@
+{
+    "detail": {
+    "name": "John RPG",
+    "health": 120,
+    "atk": 15,
+    "def": 8,
+    "description": "Unknown hero who forgot his past for whatever reason."
+    },
+    "idleConfig": "Swordsman_Idle.txt",
+    "attackConfig": "Swordsman_Attack.txt",
+    "walkConfig": "Swordsman_Walk.txt",
+    "deathConfig": "Swordsman_Death.txt"
+}

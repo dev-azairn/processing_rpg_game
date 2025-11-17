@@ -1,0 +1,15 @@
+{
+    "normal": [
+        { "speaker": "Lily", "line": "My power is my responsibility, I will use it for rights." },
+        { "speaker": "Lily", "line": "My mother taught me to be perfect in all things. I don't intend to fail." },
+        { "speaker": "Lily", "line": "Hmph. Don't get in my way, I know exactly what I'm doing." },
+        { "speaker": "Lily", "line": "Magic is a an art, not a blunt weapon. Don't be sloppy." },
+        { "speaker": "Lily", "line": "Of course I can handle this. Who do you think I am?" }
+      ],
+    "taunt": [
+        { "speaker": "Lily", "line": "All evils will perish." },
+        { "speaker": "Lily", "line": "The light will guide me to end this darkness." },
+        { "speaker": "Lily", "line": "I fight not for myself, but for the light of this world." },
+        { "speaker": "Lily", "line": "I'll show you the REAL difference in our power. Try to keep up!" }
+      ]
+}

@@ -1,0 +1,15 @@
+{
+    "normal": [
+        { "speaker": "Cole", "line": "N-N-Nice to meet you. I'm...Cole." },
+        { "speaker": "Cole", "line": "I-I'm just... going to stand here. Yes. This is a good, safe spot." },
+        { "speaker": "Cole", "line": "This armor is... really heavy. But it's s-safe! Safe is good, right?" },
+        { "speaker": "Cole", "line": "I... I really don't like fighting. Are you s-sure there isn't a... a peaceful option?" },
+        { "speaker": "Cole", "line": "This axe? Oh, it's... it's mostly for... c-chopping wood! Yes. Mostly." }
+      ],
+    "taunt": [
+        { "speaker": "Cole", "line": "P-Please don’t hit me... I’m just trying to survive here!" },
+        { "speaker": "Cole", "line": "I-I’m fully armored, so... I’ll be fine, right? Right...?" },
+        { "speaker": "Cole", "line": "This axe is so heavy... please don’t make me swing it!!" },
+        { "speaker": "Cole", "line": "I'm s-so sorry about this! I have to... but I don't want to! Please run away!" }
+      ]
+}

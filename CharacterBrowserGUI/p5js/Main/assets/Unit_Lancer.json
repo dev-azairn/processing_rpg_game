@@ -1,0 +1,13 @@
+{
+    "detail": {
+    "name": "Land",
+    "health": 130,
+    "atk": 17,
+    "def": 12,
+    "description": "He became a lancer because he thinks riding a horse is cool and wants to name himself 'Land the Lancer'."
+    },
+    "idleConfig": "Lancer_Idle.txt",
+    "attackConfig": "Lancer_Attack.txt",
+    "walkConfig": "Lancer_Walk.txt",
+    "deathConfig": "Lancer_Death.txt"
+}

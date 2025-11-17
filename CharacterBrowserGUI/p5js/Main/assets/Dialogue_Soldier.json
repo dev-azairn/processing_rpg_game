@@ -1,0 +1,15 @@
+{
+    "normal": [
+        { "speaker": "Luke", "line": "My name is Luke! I'm glad I can help you!" },
+        { "speaker": "Luke", "line": "Wow, am I really fighting alongside people like you? This is amazing!" },
+        { "speaker": "Luke", "line": "I'm going to be a great soldier one day, just you watch! I won't let anyone down." },
+        { "speaker": "Luke", "line": "Back in my village, we only heard stories of heroes... now I'm on my own story!" },
+        { "speaker": "Luke", "line": "Just give me an order! I'm ready for anything!" }
+      ],
+    "taunt": [
+        { "speaker": "Luke", "line": "It's not too late to do a good thing!" },
+        { "speaker": "Luke", "line": "You can still change!" },
+        { "speaker": "Luke", "line": "I'll make you stop those evil acts!" },
+        { "speaker": "Luke", "line": "A true soldier protects the innocent! That's why I have to stop you!" }
+      ]
+}

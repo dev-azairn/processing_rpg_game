@@ -1,0 +1,15 @@
+{
+    "normal": [
+        { "speaker": "John RPG", "line": "My name is John... RPG is just what people called me." },
+        { "speaker": "John RPG", "line": "This place... it feels new, but strangely familiar." },
+        { "speaker": "John RPG", "line": "I can't remember my past, but I know I can build a future." },
+        { "speaker": "John RPG", "line": "This sword feels... right in my hand. Even if I don't know why." },
+        { "speaker": "John RPG", "line": "It's a strange world, but... I'm ready to face it." }
+      ],
+    "taunt": [
+        { "speaker": "John RPG", "line": "I don't know who you are. Well... I don't even know who I am." },
+        { "speaker": "John RPG", "line": "They called me a hero for a reason, so brace yourself!" },
+        { "speaker": "John RPG", "line": "Look, I don’t even know how I got here, but you for sure don't wanna mess with me!" },
+        { "speaker": "John RPG", "line": "My memory might be gone, but my skills aren't. Let's do this." }
+      ]
+}

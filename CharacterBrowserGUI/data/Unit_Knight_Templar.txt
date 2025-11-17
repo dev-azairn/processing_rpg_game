@@ -1,0 +1,9 @@
+Adira
+150
+20
+20
+She is a commander of Templar and known as the strongest woman in the world.
+Knight_Templar_Idle.txt
+Knight_Templar_Attack.txt
+Knight_Templar_Walk.txt
+Knight_Templar_Death.txt

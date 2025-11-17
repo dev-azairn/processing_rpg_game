@@ -1,0 +1,15 @@
+{
+    "normal": [
+        { "speaker": "Timmie", "line": "I am no one... just left me alone." },
+        { "speaker": "Timmie", "line": "The cities are too loud. The forest is quiet." },
+        { "speaker": "Timmie", "line": "You're moving too heavy. They can hear you a mile away." },
+        { "speaker": "Timmie", "line": "People are... complicated. The woods are simple." },
+        { "speaker": "Timmie", "line": "...Do you need something?" }
+      ],
+    "taunt": [
+        { "speaker": "Timmie", "line": "Step on the wood... and you will never be found." },
+        { "speaker": "Timmie", "line": "The forest is my domain, you are now under my shadow." },
+        { "speaker": "Timmie", "line": "I know your weakness…and when I strike, you’ll never see it coming!" },
+        { "speaker": "Timmie", "line": "You'll never even hear the arrow that ends you." }
+      ]
+}

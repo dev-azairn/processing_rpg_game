@@ -1,0 +1,207 @@
+{
+  "JOHN_INTERACTIONS": "---",
+  "scene_john_lily": [
+    { "speaker": "John RPG", "line": "My name is John... RPG is just what people called me." },
+    { "speaker": "Lily", "line": "My power is my responsibility, I will use it for rights." }
+  ],
+  "scene_john_mary": [
+    { "speaker": "John RPG", "line": "My name is John... RPG is just what people called me." },
+    { "speaker": "Mary", "line": "If my power is a compass, then I am a guide." }
+  ],
+  "scene_john_luke": [
+    { "speaker": "John RPG", "line": "My name is John... RPG is just what people called me." },
+    { "speaker": "Luke", "line": "My name is Luke! I'm glad I can help you!" }
+  ],
+  "scene_john_adira": [
+    { "speaker": "John RPG", "line": "My name is John... RPG is just what people called me." },
+    { "speaker": "Adira", "line": "I'm Adira of Templar. I'll never stop until there are no enemies left." }
+  ],
+  "scene_john_kiara": [
+    { "speaker": "John RPG", "line": "My name is John... RPG is just what people called me." },
+    { "speaker": "Kiara", "line": "My sis is the best, don't you agree?!" }
+  ],
+  "scene_john_land": [
+    { "speaker": "John RPG", "line": "My name is John... RPG is just what people called me." },
+    { "speaker": "Land", "line": "I'm Land the Lancer. Call me anytime you need the help." }
+  ],
+  "scene_john_timmie": [
+    { "speaker": "John RPG", "line": "My name is John... RPG is just what people called me." },
+    { "speaker": "Timmie", "line": "I am no one... just left me alone." }
+  ],
+  "scene_john_cole": [
+    { "speaker": "John RPG", "line": "My name is John... RPG is just what people called me." },
+    { "speaker": "Cole", "line": "N-N-Nice to meet you. I'm...Cole." }
+  ],
+  "LILY_INTERACTIONS": "---",
+  "scene_lily_mary": [
+    { "speaker": "Lily", "line": "My power is my responsibility, I will use it for rights." },
+    { "speaker": "Mary", "line": "If my power is a compass, then I am a guide." }
+  ],
+  "scene_lily_luke": [
+    { "speaker": "Lily", "line": "My power is my responsibility, I will use it for rights." },
+    { "speaker": "Luke", "line": "My name is Luke! I'm glad I can help you!" }
+  ],
+  "scene_lily_adira": [
+    { "speaker": "Lily", "line": "My power is my responsibility, I will use it for rights." },
+    { "speaker": "Adira", "line": "I'm Adira of Templar. I'll never stop until there are no enemies left." }
+  ],
+  "scene_lily_kiara": [
+    { "speaker": "Lily", "line": "My power is my responsibility, I will use it for rights." },
+    { "speaker": "Kiara", "line": "My sis is the best, don't you agree?!" }
+  ],
+  "scene_lily_land": [
+    { "speaker": "Lily", "line": "My power is my responsibility, I will use it for rights." },
+    { "speaker": "Land", "line": "I'm Land the Lancer. Call me anytime you need the help." }
+  ],
+  "scene_lily_timmie": [
+    { "speaker": "Lily", "line": "My power is my responsibility, I will use it for rights." },
+    { "speaker": "Timmie", "line": "I am no one... just left me alone." }
+  ],
+  "scene_lily_cole": [
+    { "speaker": "Lily", "line": "My power is my responsibility, I will use it for rights." },
+    { "speaker": "Cole", "line": "N-N-Nice to meet you. I'm...Cole." }
+  ],
+  "MARY_INTERACTIONS": "---",
+  "scene_mary_luke": [
+    { "speaker": "Mary", "line": "If my power is a compass, then I am a guide." },
+    { "speaker": "Luke", "line": "My name is Luke! I'm glad I can help you!" }
+  ],
+  "scene_mary_adira": [
+    { "speaker": "Mary", "line": "If my power is a compass, then I am a guide." },
+    { "speaker": "Adira", "line": "I'm Adira of Templar. I'll never stop until there are no enemies left." }
+  ],
+  "scene_mary_kiara": [
+    { "speaker": "Mary", "line": "If my power is a compass, then I am a guide." },
+    { "speaker": "Kiara", "line": "My sis is the best, don't you agree?!" }
+  ],
+  "scene_mary_land": [
+    { "speaker": "Mary", "line": "If my power is a compass, then I am a guide." },
+    { "speaker": "Land", "line": "I'm Land the Lancer. Call me anytime you need the help." }
+  ],
+  "scene_mary_timmie": [
+    { "speaker": "Mary", "line": "If my power is a compass, then I am a guide." },
+    { "speaker": "Timmie", "line": "I am no one... just left me alone." }
+  ],
+  "scene_mary_cole": [
+    { "speaker": "Mary", "line": "If my power is a compass, then I am a guide." },
+    { "speaker": "Cole", "line": "N-N-Nice to meet you. I'm...Cole." }
+  ],
+  "LUKE_INTERACTIONS": "---",
+  "scene_luke_adira": [
+    { "speaker": "Luke", "line": "My name is Luke! I'm glad I can help you!" },
+    { "speaker": "Adira", "line": "I'm Adira of Templar. I'll never stop until there are no enemies left." }
+  ],
+  "scene_luke_kiara": [
+    { "speaker": "Luke", "line": "My name is Luke! I'm glad I can help you!" },
+    { "speaker": "Kiara", "line": "My sis is the best, don't you agree?!" }
+  ],
+  "scene_luke_land": [
+    { "speaker": "Luke", "line": "My name is Luke! I'm glad I can help you!" },
+    { "speaker": "Land", "line": "I'm Land the Lancer. Call me anytime you need the help." }
+  ],
+  "scene_luke_timmie": [
+    { "speaker": "Luke", "line": "My name is Luke! I'm glad I can help you!" },
+    { "speaker": "Timmie", "line": "I am no one... just left me alone." }
+  ],
+  "scene_luke_cole": [
+    { "speaker": "Luke", "line": "My name is Luke! I'm glad I can help you!" },
+    { "speaker": "Cole", "line": "N-N-Nice to meet you. I'm...Cole." }
+  ],
+  "ADIRA_INTERACTIONS": "---",
+  "scene_adira_kiara": [
+  { "speaker": "Adira", "line": "Kiara, stay close. I don’t want anything happening to you out there." },
+  { "speaker": "Kiara", "line": "Don’t worry, sis... I can handle myself. But you better not get hurt either!!" }
+  ],
+  "scene_adira_land": [
+    { "speaker": "Adira", "line": "I'm Adira of Templar. I'll never stop until there are no enemies left." },
+    { "speaker": "Land", "line": "I'm Land the Lancer. Call me anytime you need the help." }
+  ],
+  "scene_adira_timmie": [
+    { "speaker": "Adira", "line": "I'm Adira of Templar. I'll never stop until there are no enemies left." },
+    { "speaker": "Timmie", "line": "I am no one... just left me alone." }
+  ],
+  "scene_adira_cole": [
+    { "speaker": "Adira", "line": "I'm Adira of Templar. I'll never stop until there are no enemies left." },
+    { "speaker": "Cole", "line": "N-N-Nice to meet you. I'm...Cole." }
+  ],
+  "KIARA_INTERACTIONS": "---",
+  "scene_kiara_land": [
+    { "speaker": "Kiara", "line": "My sis is the best, don't you agree?!" },
+    { "speaker": "Land", "line": "I'm Land the Lancer. Call me anytime you need the help." }
+  ],
+  "scene_kiara_timmie": [
+    { "speaker": "Kiara", "line": "My sis is the best, don't you agree?!" },
+    { "speaker": "Timmie", "line": "I am no one... just left me alone." }
+  ],
+  "scene_kiara_cole": [
+    { "speaker": "Kiara", "line": "My sis is the best, don't you agree?!" },
+    { "speaker": "Cole", "line": "N-N-Nice to meet you. I'm...Cole." }
+  ],
+  "LAND_INTERACTIONS": "---",
+  "scene_land_timmie": [
+    { "speaker": "Land", "line": "I'm Land the Lancer. Call me anytime you need the help." },
+    { "speaker": "Timmie", "line": "I am no one... just left me alone." }
+  ],
+  "scene_land_cole": [
+    { "speaker": "Land", "line": "I'm Land the Lancer. Call me anytime you need the help." },
+    { "speaker": "Cole", "line": "N-N-Nice to meet you. I'm...Cole." }
+  ],
+  "TIMMIE_INTERACTIONS": "---",
+  "scene_timmie_cole": [
+    { "speaker": "Timmie", "line": "I am no one... just left me alone." },
+    { "speaker": "Cole", "line": "N-N-Nice to meet you. I'm...Cole." }
+  ],
+
+  "COMBAT_TAUNTS": "---",
+  "taunt_john": [
+    { "speaker": "John RPG", "line": "I don't know who you are. Well... I don't even know who I am." },
+    { "speaker": "John RPG", "line": "They called me a hero for a reason, so brace yourself!" },
+    { "speaker": "John RPG", "line": "Look, I don’t even know how I got here, but you for sure don't wanna mess with me!" }
+  ],
+  "taunt_lily": [
+  { "speaker": "Lily", "line": "All evils will perish." },
+  { "speaker": "Lily", "line": "The light will guide me to end this darkness." },
+  { "speaker": "Lily", "line": "I fight not for myself, but for the light of this world." }
+  ],
+  "taunt_mary": [
+  { "speaker": "Mary", "line": "I don't wish to harm you, this is an atonement..." },
+  { "speaker": "Mary", "line": "I offer this to you as a reconciliation..." },
+  { "speaker": "Mary", "line": "Please accept this as my effort to compensate for your wrongs..." }
+  ],
+  "taunt_luke": [
+  { "speaker": "Luke", "line": "It's not too late to do a good thing!" },
+  { "speaker": "Luke", "line": "You can still change!" },
+  { "speaker": "Luke", "line": "I'll make you stop those evil acts!" }
+  ],
+  "taunt_adira": [
+  { "speaker": "Adira", "line": "Don't you dare stand in my path." },
+  { "speaker": "Adira", "line": "This will be your last mistake." },
+  { "speaker": "Adira", "line": "Move aside, or prepare to face your death." }
+  ],
+  "taunt_kiara": [
+  { "speaker": "Kiara", "line": "Huh? Did you just look at my sister without permission!? I’ll end you!" },
+  { "speaker": "Kiara", "line": "Don't you dare think of touching my sis! I’ll crush you!!" },
+  { "speaker": "Kiara", "line": "You're nothing compared to my sis! So, get out of my sight!!" }
+  ],
+  "taunt_land": [
+  { "speaker": "Land", "line": "Did you just call me Land without the Lancer? That's unforgivable." },
+  { "speaker": "Land", "line": "I became a lancer because it’s the path to true power... and horses are awesome." },
+  { "speaker": "Land", "line": "You won’t understand the weight of my name, this is my legacy!" }
+  ],
+  "taunt_timmie": [
+  { "speaker": "Timmie", "line": "Step on the wood... and you will never be found." },
+  { "speaker": "Timmie", "line": "The forest is my domain, you are now under my shadow." },
+  { "speaker": "Timmie", "line": "I know your weakness…and when I strike, you’ll never see it coming!" }
+  ],
+  "taunt_cole": [
+  { "speaker": "Cole", "line": "P-Please don’t hit me... I’m just trying to survive here!" },
+  { "speaker": "Cole", "line": "I-I’m fully armored, so... I’ll be fine, right? Right...?" },
+  { "speaker": "Cole", "line": "This axe is so heavy... please don’t make me swing it!!" }
+  ],
+  "taunt_adira_kiara": [
+  { "speaker": "Adira", "line": "Step aside, Kiara. You don’t need to fight me to prove anything." },
+  { "speaker": "Kiara", "line": "*sniff* I wanna be your number one fan! I gotta show you I’m worthy of being your sister!!" }
+  ],
+  "UTILITY_NODES": "---",
+  "dialogue_end": []
+}

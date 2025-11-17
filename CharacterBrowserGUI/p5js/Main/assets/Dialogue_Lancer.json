@@ -1,0 +1,15 @@
+{
+    "normal": [
+        { "speaker": "Land", "line": "I'm Land the Lancer. Call me anytime you need the help." },
+        { "speaker": "Land", "line": "Please, it's *Land the Lancer*. My title is important!!" },
+        { "speaker": "Land", "line": "Me and my horse, we're a package deal. We are the strongest buddy in the universe!" },
+        { "speaker": "Land", "line": "I'm telling you, 'Land the Lancer' just sounds heroic. It's great, right?" },
+        { "speaker": "Land", "line": "Did you know lances are the coolest? And you can use them on a horse!" }
+      ],
+    "taunt": [
+        { "speaker": "Land", "line": "Did you just call me Land without the Lancer? That's unforgivable." },
+        { "speaker": "Land", "line": "I became a lancer because it’s the path to true power... and horses are awesome." },
+        { "speaker": "Land", "line": "You won’t understand the weight of my name, this is my legacy!" },
+        { "speaker": "Land", "line": "Prepare to be... lanced! By Land! The Lancer!" }
+      ]
+}

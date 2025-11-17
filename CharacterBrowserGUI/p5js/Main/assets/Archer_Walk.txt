@@ -1,0 +1,1 @@
+Archer Walk Archer_Walk_ .png 8 100 100 3

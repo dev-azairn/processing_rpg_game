@@ -1,0 +1,13 @@
+{
+    "detail": {
+    "name": "Kiara",
+    "health": 140,
+    "atk": 12,
+    "def": 18,
+    "description": "Adira's sister and biggest fan. She admires her strength, hoping that one day she will be like her."
+    },
+    "idleConfig": "Knight_Idle.txt",
+    "attackConfig": "Knight_Attack.txt",
+    "walkConfig": "Knight_Walk.txt",
+    "deathConfig": "Knight_Death.txt"
+}

@@ -1,0 +1,13 @@
+{
+    "detail": {
+    "name": "Luke",
+    "health": 110,
+    "atk": 13,
+    "def": 10,
+    "description": "A young man from a small village who wants to be a soldier one day."
+    },
+    "idleConfig": "Soldier_Idle.txt",
+    "attackConfig": "Soldier_Attack.txt",
+    "walkConfig": "Soldier_Walk.txt",
+    "deathConfig": "Soldier_Death.txt"
+}

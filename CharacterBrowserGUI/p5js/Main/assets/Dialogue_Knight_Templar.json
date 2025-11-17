@@ -1,0 +1,15 @@
+{
+    "normal": [
+        { "speaker": "Adira", "line": "I'm Adira of Templar. I'll never stop until there are no enemies left." },
+        { "speaker": "Adira", "line": "Have you seen Kiara? She's supposed to be training, not wandering off." },
+        { "speaker": "Adira", "line": "Discipline is the sword of the righteous. Remember that." },
+        { "speaker": "Adira", "line": "State your business. I do not have time for idle chatter." },
+        { "speaker": "Adira", "line": "My duty as Commander is to the order, and to the people. I will not fail." }
+      ],
+    "taunt": [
+        { "speaker": "Adira", "line": "Don't you dare stand in my path." },
+        { "speaker": "Adira", "line": "This will be your last mistake." },
+        { "speaker": "Adira", "line": "Move aside, or prepare to face your death." },
+        { "speaker": "Adira", "to": "Kiara", "line": "Step aside, Kiara. You don’t need to fight me to prove anything."}
+      ]
+}

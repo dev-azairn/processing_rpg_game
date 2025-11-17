@@ -80,6 +80,7 @@ class CharacterBrowser {
              default:
                text = "NO";
            }
+           
            textAlign(CENTER);
            textSize(12);
            text(text,width-235 + 60*state.ordinal(), 258 + i*200);
@@ -98,7 +99,16 @@ class CharacterBrowser {
     strokeWeight(3);
     rect(0, height - 212.5, width, 212.5);
     
-  
+    fill(0,255,0,100);
+    stroke(0);
+    strokeWeight(3);
+    rect(20, height - (212.5 + 120), 200, 100, 20);
+    fill(255);
+    textSize(40);
+    textAlign(CENTER);
+    text("Units: ", 100, height - (212.5 + 60));
+    fill(255,255, 0);
+    text(units.size(),175, height - (212.5 + 60));
   int i = 0;
   for (String hkey : units.keySet()) {
     Unit unit = units.get(hkey);
@@ -113,9 +123,13 @@ class CharacterBrowser {
       rectGradient(x, y, 150, 150, color(150, 60, 145), color(150, 198, 157), PI / 4, 5, color(0, 0, 0), 25, CENTER);
     }
     unit.displayPortrait(x, y);
-    textSize(16);
+    rectMode(CENTER);
     fill(255);
-    text(hkey, x, y);
+    rect(x,y-75,90,45, 15);
+    textAlign(CENTER);
+    textSize(16);
+    fill(0);
+    text(hkey, x, y - 70);
     i++;
   }
     // Scrolling Bar

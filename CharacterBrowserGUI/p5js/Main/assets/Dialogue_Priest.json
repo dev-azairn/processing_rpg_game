@@ -1,0 +1,15 @@
+{
+    "normal": [
+        { "speaker": "Mary", "line": "If my power is a compass, then I am a guide." },
+        { "speaker": "Mary", "line": "Are you feeling lost? I can offer comfort, if you wish." },
+        { "speaker": "Mary", "line": "The church taught me that even in darkness, there is a path to light." },
+        { "speaker": "Mary", "line": "We all carry our own burdens. Please, let me help lighten yours." },
+        { "speaker": "Mary", "line": "May your heart find peace in these trying times." }
+      ],
+    "taunt": [
+        { "speaker": "Mary", "line": "I don't wish to harm you, this is an atonement..." },
+        { "speaker": "Mary", "line": "I offer this to you as a reconciliation..." },
+        { "speaker": "Mary", "line": "Please accept this as my effort to compensate for your wrongs..." },
+        { "speaker": "Mary", "line": "I will pray for your forgiveness... and for mine." }
+      ]
+}

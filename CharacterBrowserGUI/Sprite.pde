@@ -49,14 +49,16 @@ class Sprite {
     //get the filepaths
     String[] fileNames = new String[this.totalSize];
     String path = this.characterFolder + "/" + this.characterAction + "/";
+    String base = manager.getBaseDir();
     //set array of img size
     sprites = new PImage[this.totalSize];
     for(int index = 0; index < this.totalSize; index++){
       fileNames[index] = this.imageFileName + (index+1) + fileExtension;
-      sprites[index] = loadImage("data/" + path + fileNames[index]);
+      sprites[index] = loadImage(base + "/" + path + fileNames[index]);
     }
   }
    
+  
   
   void loadConfig(String configFileName){
     String[] configLines = loadStrings(configFileName);

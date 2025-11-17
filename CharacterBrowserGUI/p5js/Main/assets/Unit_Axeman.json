@@ -1,0 +1,13 @@
+{
+    "detail": {
+    "name": "Cole",
+    "health": 140,
+    "atk": 18,
+    "def": 15,
+    "description": "He's scared of getting hit, so he stacks the strongest armor possible and only uses an axe because of the weight."
+    },
+    "idleConfig": "Axeman_Idle.txt",
+    "attackConfig": "Axeman_Attack.txt",
+    "walkConfig": "Axeman_Walk.txt",
+    "deathConfig": "Axeman_Death.txt"
+}

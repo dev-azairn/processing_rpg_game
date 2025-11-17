@@ -1,0 +1,13 @@
+{
+    "detail": {
+    "name": "Lily",
+    "health": 70,
+    "atk": 20,
+    "def": 5,
+    "description": "Daughter of the strongest mage in the world, she learned everything from her mother."
+    },
+    "idleConfig": "Wizard_Idle.txt",
+    "attackConfig": "Wizard_Attack.txt",
+    "walkConfig": "Wizard_Walk.txt",
+    "deathConfig": "Wizard_Death.txt"
+}

@@ -197,7 +197,7 @@ class CharacterDialogue {
   
   void mousePressed(Unit[] selectedUnit) {
     
-     Unit newUnit1 = selectedUnit[0];
+    Unit newUnit1 = selectedUnit[0];
     Unit newUnit2 = selectedUnit[1];
 
     // Case 1: Two units are selected. Start a taunt.
