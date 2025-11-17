@@ -1,0 +1,15 @@
+{
+    "normal": [
+        { "speaker": "Fenrir", "line": "Grrr..." },
+        { "speaker": "Fenrir", "line": "*Sniff, sniff...*" },
+        { "speaker": "Fenrir", "line": "Awooo...?" },
+        { "speaker": "Fenrir", "line": "*A low growl*" },
+        { "speaker": "Fenrir", "line": "*Pants heavily*" }
+      ],
+    "taunt": [
+        { "speaker": "Fenrir", "line": "GRRRRROWL!" },
+        { "speaker": "Fenrir", "line": "AWOOOOOOOOOOOO!" },
+        { "speaker": "Fenrir", "line": "*Snarls aggressively*" },
+        { "speaker": "Fenrir", "line": "*Snaps jaws*" }
+      ]
+}
