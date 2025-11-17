@@ -179,6 +179,8 @@ class CharacterBrowser {
            selectedUnit[1].setPosition(450, 450);
            println("Selected:" + unit);
          }
+         characterDialogue.mousePressed(selectedUnit);
+         return;
        }
        i++;
      }
@@ -199,7 +201,7 @@ class CharacterBrowser {
        }
      }
      
-     characterDialogue.mousePressed(selectedUnit);
+     
      
    }
   

@@ -187,6 +187,7 @@ class CharacterBrowser {
       if (mouseX >= xBoundLeft && mouseX <= xBoundRight &&
           mouseY >= yBoundTop && mouseY <= yBoundBottom) {
         this.selectUnit(unit);
+        
       }
     }
   }
@@ -215,6 +216,7 @@ class CharacterBrowser {
       this.selectedUnit[1] = unit;
       this.selectedUnit[1].setPosition(450, 450);
     }
+    
   }
 
   checkStateButtons() {
