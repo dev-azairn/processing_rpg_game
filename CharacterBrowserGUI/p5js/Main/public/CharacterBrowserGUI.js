@@ -6,6 +6,7 @@ let unitsConfigData;
 let assetsToLoad = 0;
 let assetsLoaded = 0;
 let isInitialized = false;
+let dialogueData;
 
 // --- 1. PRELOAD ---
 function preload() {
@@ -15,6 +16,11 @@ function preload() {
   loadJSON('/api/units', (data) => {
     unitsConfigData = data;
     console.log("JSON loaded.");
+  });
+
+  loadJSON('/api/dialogue', (data) => {
+    dialogueData = data;
+    console.log("Dialogue JSON loaded.");
   });
 }
 
@@ -32,9 +38,7 @@ function setup() {
 }
 
 // --- 3. ASSET CALLBACK ---
-function assetLoadCallback() {
-  assetsLoaded++;
-}
+
 
 // --- 4. DRAW ---
 function draw() {
@@ -60,7 +64,7 @@ function draw() {
     for (let unit of units) {
       unit.initialize(); // <-- Portraits are created here for ALL units
     }
-    
+    characterDialogue = new CharacterDialogue(units, dialogueData);
     isInitialized = true; // Set the flag
     console.log("Initialization complete. Starting app.");
   }
@@ -69,12 +73,15 @@ function draw() {
   if (isInitialized) {
     background(255);
     browser.renderGUI(units);
+    characterDialogue.update();
+    characterDialogue.render();
   }
 }
 // --- 5. GLOBAL INPUT HANDLERS ---
 function mousePressed() {
   // Pass the event to the browser's handler
   browser.handleMousePressed(units);
+  characterDialogue.handleMousePressed(browser.selectedUnit);
 }
 
 function mouseWheel(event) {
@@ -138,4 +145,8 @@ function rectGradient(x, y, w, h, c1, c2, radianAngle,
   stroke(strokeColor);
   rectMode(rectModeVal);
   rect(x, y, w, h, borderRadius);
+}
+
+function assetLoadCallback() {
+  assetsLoaded++;
 }

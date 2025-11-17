@@ -24,13 +24,16 @@ const startServer = async () => {
     console.error("Error: 'assets' key not found in config.json");
     return;
   }
-
-  const units = await utils.loadData(dataPath);
-  
-  console.log(units);
+  let units = [];
+  let dialogue = {};
+  await utils.loadData(units, dialogue, dataPath);
   
   app.get('/api/units', (req, res) => {
     res.json(units);
+  })
+
+  app.get('/api/dialogue', (req, res) => {
+    res.json(dialogue);
   })
 
   app.get('/assets/:element/:fileName', (req, res) => {

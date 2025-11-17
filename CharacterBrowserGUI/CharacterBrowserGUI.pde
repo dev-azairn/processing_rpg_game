@@ -7,8 +7,6 @@ HashMap<String, Unit> units;
 CharacterBrowser characterBrowser;
 CharacterDialogue characterDialogue; 
 
-Unit oldUnit1 = null;
-Unit oldUnit2 = null;
 
 float aspectRatio = 16.0 / 9.0; // Example: 16:9 aspect ratio
 

@@ -59,24 +59,51 @@ const loadUnitData = async (units, dirname, filename) => {
         } catch (err) {
             console.error("Error loading unit data:", filePath, err);
         }
-    else if (filename.endsWith(".txt"))  
+    else if (filename.endsWith(".txt") || filename.endsWith(".ini"))  
         try {
-            
+            const configData = await fs.readFile(filePath, 'utf-8');
+            const detail = {};
+            const idle = {}, attack = {}, walk = {}, death = {};
+            const lines = configData.split(/\r?\n/);
+            detail["name"] = lines[0];
+            detail["health"] = parseFloat(lines[1]);
+            detail["atk"] = parseFloat(lines[2]);
+            detail["def"] = parseFloat(lines[3]);
+            detail["description"] = lines[4];
+            console.log(lines);
+             await Promise.all([
+                loadSprite(path.join(dirname, lines[5]), idle),
+                loadSprite(path.join(dirname, lines[6]), attack),
+                loadSprite(path.join(dirname, lines[7]), walk),
+                loadSprite(path.join(dirname, lines[8]), death)
+            ]);
+            units.push({
+                "detail": detail,
+                "idleConfig": idle,
+                "attackConfig": attack,
+                "walkConfig": walk,
+                "deathConfig": death,
+            });
         } catch (err) {
             console.error("Error loading unit data:", filePath, err);
         }
 }
 
-const loadDialogueData = () => {
+const loadDialogueData = async (dialogue, dataPath, filename) => {
     // You can implement this next
+    if (!filename.endsWith(".json")) return;
+    const filePath = path.join(dataPath,  filename); 
+    let uindex = filename.indexOf("_") + 1;
+    let extensionIndex = filename.indexOf(".");
+    const configData = await fs.readFile(filePath, 'utf-8');
+    dialogue[filename.substring(uindex, extensionIndex)] = JSON.parse(configData);
 }
 
 /**
  * Main data loading function.
  * It is now truly async and returns the loaded units.
  */
-const loadData = async (dataPath) => {
-    let units = []; // Make 'units' local to this function
+const loadData = async (units, dialogue, dataPath) => { // Make 'units' local to this function
     try {
         // 1. Await the directory read (no callback)
         const lists = await fs.readdir(dataPath);
@@ -98,6 +125,8 @@ const loadData = async (dataPath) => {
             if (stats.isFile() && filename.startsWith("Unit_")) {
                 // 5. Await the unit data load
                 await loadUnitData(units, dataPath, filename);
+            } else if (stats.isFile() && filename.startsWith("Dialogue_")) {
+                await loadDialogueData(dialogue, dataPath, filename);
             }
         }));
 
@@ -107,7 +136,7 @@ const loadData = async (dataPath) => {
 
     // 6. NOW this line runs *after* everything is done.
     console.log("Data loading complete. Units found:", units.length);
-    return units; // Return the loaded data
+    
 }
 
 
