@@ -1,65 +1,76 @@
-// --- Global Variables ---
-let units = []; // Replaces HashMap<String, Unit>
-let browser; // Replaces CharacterBrowser
+// --- GLOBAL VARIABLES ---
+let units = [];
+let browser;
 
-let oldUnit1 = null;
-let oldUnit2 = null;
+let unitsConfigData;
+let assetsToLoad = 0;
+let assetsLoaded = 0;
+let isInitialized = false;
 
-const aspectRatio = 16.0 / 9.0;
-
-// --- 1. PRELOAD (Handles all loading) ---
+// --- 1. PRELOAD ---
 function preload() {
-  // Create the browser object so its preload method can be called
   browser = new CharacterBrowser();
-  
-  // Call the browser's own preload method
-  browser.preload();
+  browser.preload(); 
 
-  // Load the unit data using the callback pattern
-  loadJSON('/api/units', dataLoaded);
+  loadJSON('/api/units', (data) => {
+    unitsConfigData = data;
+    console.log("JSON loaded.");
+  });
 }
 
-// --- 2. DATA LOADED (Callback from preload) ---
-// This runs after loadJSON finishes, but *before* setup()
-function dataLoaded(data) {
-  console.log("JSON loaded:", data);
+// --- 2. SETUP ---
+function setup() {
+  createCanvas(1280, 720);
+  frameRate(60);
   
-  // Loop through the unit configs from the server
-  for (let unitConfig of data) {
+  // Create units and *start* loading assets
+  for (let unitConfig of unitsConfigData) {
     let newUnit = new Unit(unitConfig);
-    
-    // Tell the unit to load its own images
-    // p5.js's preload will wait for these too
-    newUnit.preloadAssets();
-    
+    newUnit.loadAssets(assetLoadCallback); // Pass the global callback
     units.push(newUnit);
   }
 }
 
-// --- 3. SETUP (Runs once after preload) ---
-function setup() {
-  pixelDensity(1);
-  createCanvas(1280, 720);
-  frameRate(60);
-
-  // Initialize all units (which are now fully loaded)
-  for (let unit of units) {
-    unit.initialize();
-  }
-  
-  // Disable the right-click context menu
-  document.oncontextmenu = () => false;
+// --- 3. ASSET CALLBACK ---
+function assetLoadCallback() {
+  assetsLoaded++;
 }
 
-// --- 4. DRAW (Runs 24 times per second) ---
+// --- 4. DRAW ---
 function draw() {
-  background(255);
   
-  // Render the character browser GUI
-  // We pass 'units' so it can access the list
-  browser.renderGUI(units);
-}
+  // --- STATE 1: LOADING ---
+  if (assetsLoaded < assetsToLoad) {
+    background(0);
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(32);
+    text(`Loading Assets... ${assetsLoaded} / ${assetsToLoad}`, width / 2, height / 2);
+    return;
+  }
 
+  // --- STATE 2: INITIALIZE (THIS IS THE FIX) ---
+  // This 'if' check is the most important part.
+  // We MUST check 'assetsToLoad > 0' to prevent
+  // this from running on the very first frame.
+  if (assetsLoaded === assetsToLoad && !isInitialized && assetsToLoad > 0) {
+    console.log("All assets loaded. Initializing units...");
+    
+    // Initialize ALL units (not just selected ones)
+    for (let unit of units) {
+      unit.initialize(); // <-- Portraits are created here for ALL units
+    }
+    
+    isInitialized = true; // Set the flag
+    console.log("Initialization complete. Starting app.");
+  }
+
+  // --- STATE 3: RUNNING ---
+  if (isInitialized) {
+    background(255);
+    browser.renderGUI(units);
+  }
+}
 // --- 5. GLOBAL INPUT HANDLERS ---
 function mousePressed() {
   // Pass the event to the browser's handler
@@ -73,7 +84,7 @@ function mouseWheel(event) {
 
 // --- 6. CUSTOM GRADIENT FUNCTION ---
 // The p5.js port of your rectGradient function
-// No use more for too much element, causing low fps
+// No use more for too much element,
 function rectGradient(x, y, w, h, c1, c2, radianAngle, 
   strokeWidth, strokeColor, borderRadius, rectModeVal = CORNER) {
 

@@ -1,10 +1,8 @@
 class CharacterBrowser {
   constructor() {
-    this.selectedUnit = [null, null]; // Replaces new Unit[2]
-    this.background = null; // Will be loaded in preload()
-    this.podium = null;
+    this.selectedUnit = [null, null];
+    this.background = null;
     this.scrollOffset = 0;
-    // 'characterDialogue' removed
   }
 
   // --- LOADING ---
@@ -21,7 +19,12 @@ class CharacterBrowser {
     imageMode(CORNER);
     image(this.background, 0, 0, width, height);
 
-    // --- Display selected unit ---
+    this.displaySelectedUnits();
+    this.displayUnitList(units);
+    this.displayScrollBar(units);
+  }
+
+  displaySelectedUnits() {
     stroke(0);
     strokeWeight(2);
     rectMode(CORNER);
@@ -30,57 +33,75 @@ class CharacterBrowser {
 
     for (let i = 0; i < this.selectedUnit.length; i++) {
       if (this.selectedUnit[i] == null) {
-        stroke(0);
-        strokeWeight(2);
-        rectMode(CORNER);
-        noFill();
-        rect(width - 300, 100 + i * 200, 300, 200);
-        fill(255);
-        textSize(16);
-        textAlign(CENTER);
-        text("No selected character", width - 150, 200 + i * 200);
+        this.displayEmptySlot(i);
       } else {
-        stroke(0);
-        strokeWeight(2);
-        fill(0, 0, 0, 50);
-        rectMode(CORNER);
-        rect(width - 300, 100 + i * 200, 300, 200);
-        textAlign(CENTER);
-        fill(255);
-        textAlign(CENTER);
-        textSize(20);
-        text(this.selectedUnit[i].getName(), width - 150, 130 + i * 200);
-        fill(255);
-        textAlign(LEFT);
-        textSize(16);
-        text("Status:", width - 275, 150 + i * 200);
-        text("Health: " + this.selectedUnit[i].getHealth(), width - 250, 175 + i * 200);
-        text("ATK: " + this.selectedUnit[i].getAtk(), width - 125, 175 + i * 200);
-        text("Action:", width - 275, 225 + i * 200);
-
-        // Loop through our State object
-        let stateKeys = Object.keys(State); // ["IDLE", "WALK", "ATTACK", "DEATH"]
-        for (let k = 0; k < stateKeys.length; k++) {
-          let stateName = stateKeys[k]; // "IDLE"
-          let stateValue = State[stateName]; // 0
-          let ordinal = k; // 0, 1, 2, 3 (replaces state.ordinal())
-
-          rectMode(CENTER);
-          fill(255);
-          stroke(0);
-          strokeWeight(2);
-          rect(width - 235 + 60 * ordinal, 255 + i * 200, 50, 25, 10);
-          fill(0);
-          textAlign(CENTER);
-          textSize(12);
-          strokeWeight(1);
-          text(stateName, width - 235 + 60 * ordinal, 258 + i * 200);
-        }
-        this.selectedUnit[i].render();
+        this.displayUnitDetails(i);
       }
     }
+  }
 
-    // --- List Character ---
+  displayEmptySlot(slotIndex) {
+    stroke(0);
+    strokeWeight(2);
+    rectMode(CORNER);
+    noFill();
+    rect(width - 300, 100 + slotIndex * 200, 300, 200);
+    fill(255);
+    textSize(16);
+    textAlign(CENTER);
+    text("No selected character", width - 150, 200 + slotIndex * 200);
+  }
+
+  displayUnitDetails(slotIndex) {
+    stroke(0);
+    strokeWeight(2);
+    fill(0, 0, 0, 50);
+    rectMode(CORNER);
+    rect(width - 300, 100 + slotIndex * 200, 300, 200);
+    
+    let unit = this.selectedUnit[slotIndex];
+    let baseY = 100 + slotIndex * 200;
+
+    fill(255);
+    textAlign(CENTER);
+    textSize(20);
+    text(unit.getName(), width - 150, baseY + 30);
+    
+    fill(255);
+    textAlign(LEFT);
+    textSize(16);
+    text("Status:", width - 275, baseY + 50);
+    text("Health: " + unit.getHealth(), width - 250, baseY + 75);
+    text("ATK: " + unit.getAtk(), width - 125, baseY + 75);
+    text("Action:", width - 275, baseY + 125);
+
+    this.displayStateButtons(slotIndex);
+    unit.render();
+  }
+
+  displayStateButtons(slotIndex) {
+    let stateKeys = Object.keys(State);
+    let baseY = 255 + slotIndex * 200;
+
+    for (let k = 0; k < stateKeys.length; k++) {
+      let stateName = stateKeys[k];
+      let buttonX = width - 235 + 60 * k;
+
+      rectMode(CENTER);
+      fill(255);
+      stroke(0);
+      strokeWeight(2);
+      rect(buttonX, baseY, 50, 25, 10);
+      
+      fill(0);
+      textAlign(CENTER);
+      textSize(12);
+      strokeWeight(1);
+      text(stateName, buttonX, baseY + 3);
+    }
+  }
+
+  displayUnitList(units) {
     rectMode(CORNER);
     fill(0, 0, 0, 50);
     stroke(0);
@@ -91,6 +112,7 @@ class CharacterBrowser {
     stroke(0);
     strokeWeight(3);
     rect(20, height - (212.5 + 120), 200, 100, 20);
+    
     fill(255);
     textSize(40);
     textAlign(CENTER);
@@ -101,37 +123,39 @@ class CharacterBrowser {
 
     // Iterate over the 'units' array
     for (let i = 0; i < units.length; i++) {
-      let unit = units[i];
-      let hkey = unit.getName();
-
-      let x = 165 * i + 100 + this.scrollOffset;
-      let y = height - 100;
-
-      // TODO: rectGradient is not a standard p5.js function.
-      // Replaced with a simple rect().
-      rectMode(CENTER);
-      if (!unit.isSelected) {
-        fill(232, 60, 145);
-      } else {
-        fill(150, 60, 145);
-      }
-      
-      stroke(0);
-      strokeWeight(5);
-      rect(x, y, 150, 150, 25);
-      
-      unit.displayPortrait(x, y);
-      rectMode(CENTER);
-      fill(255);
-      rect(x, y - 75, 90, 45, 15);
-      textAlign(CENTER);
-      textSize(16);
-      fill(0);
-      strokeWeight(1);
-      text(hkey, x, y - 70);
+      this.displayUnitCard(units[i], i);
     }
+  }
 
-    // --- Scrolling Bar ---
+  displayUnitCard(unit, index) {
+    let x = 165 * index + 100 + this.scrollOffset;
+    let y = height - 100;
+
+    rectMode(CENTER);
+    if (!unit.isSelected) {
+      fill(232, 60, 145);
+    } else {
+      fill(150, 60, 145);
+    }
+    
+    stroke(0);
+    strokeWeight(5);
+    rect(x, y, 150, 150, 25);
+    
+    // Display portrait for ALL units (now initialized during preload)
+    unit.displayPortrait(x, y);
+    
+    rectMode(CENTER);
+    fill(255);
+    rect(x, y - 75, 90, 45, 15);
+    textAlign(CENTER);
+    textSize(16);
+    fill(0);
+    strokeWeight(1);
+    text(unit.getName(), x, y - 70);
+  }
+
+  displayScrollBar(units) {
     fill(255);
     strokeWeight(2);
     stroke(150);
@@ -140,66 +164,70 @@ class CharacterBrowser {
     let scrollBarWidth = (width / maxScrollContent) * width;
     let scrollBarX = (-this.scrollOffset / maxScrollContent) * width + 20;
     rect(scrollBarX, height - 12, scrollBarWidth, 7, 10);
-    
-    // characterDialogue.update() / render() removed
   }
 
-  // --- INPUT ---
+  // --- INPUT HANDLING ---
   // Call this from the main p5.js mousePressed()
   handleMousePressed(units) {
-    // --- 1. Check Unit Selection from list ---
+    this.checkUnitSelection(units);
+    this.checkStateButtons();
+  }
+
+  checkUnitSelection(units) {
     for (let i = 0; i < units.length; i++) {
       let unit = units[i];
       let x = 165 * i + 100 + this.scrollOffset;
       let y = height - 100;
 
-      // Bounds for a rectMode(CENTER) rect
-      let xBoundLeft = x - 150 / 2;
-      let xBoundRight = x + 150 / 2;
-      let yBoundTop = y - 150 / 2;
-      let yBoundBottom = y + 150 / 2;
+      let xBoundLeft = x - 75;
+      let xBoundRight = x + 75;
+      let yBoundTop = y - 75;
+      let yBoundBottom = y + 75;
 
       if (mouseX >= xBoundLeft && mouseX <= xBoundRight &&
           mouseY >= yBoundTop && mouseY <= yBoundBottom) {
-        
-        if (mouseButton === LEFT) {
-          if (this.selectedUnit[0] == unit) {
-            this.selectedUnit[0].unselect();
-            this.selectedUnit[0] = null;
-            return;
-          }
-          if (this.selectedUnit[1] == unit) return;
-          if (this.selectedUnit[0] != null) this.selectedUnit[0].unselect();
-          unit.select();
-          this.selectedUnit[0] = unit;
-          this.selectedUnit[0].setPosition(350, 350);
-        } else if (mouseButton === RIGHT) {
-          if (this.selectedUnit[1] == unit) {
-            this.selectedUnit[1].unselect();
-            this.selectedUnit[1] = null;
-            return;
-          }
-          if (this.selectedUnit[0] == unit) return;
-          if (this.selectedUnit[1] != null) this.selectedUnit[1].unselect();
-          unit.select();
-          this.selectedUnit[1] = unit;
-          this.selectedUnit[1].setPosition(450, 450);
-        }
+        this.selectUnit(unit);
       }
     }
+  }
 
-    // --- 2. Check State Buttons ---
+  selectUnit(unit) {
+    if (mouseButton === LEFT) {
+      if (this.selectedUnit[0] == unit) {
+        this.selectedUnit[0].unselect();
+        this.selectedUnit[0] = null;
+        return;
+      }
+      if (this.selectedUnit[1] == unit) return;
+      if (this.selectedUnit[0] != null) this.selectedUnit[0].unselect();
+      unit.select();
+      this.selectedUnit[0] = unit;
+      this.selectedUnit[0].setPosition(350, 350);
+    } else if (mouseButton === RIGHT) {
+      if (this.selectedUnit[1] == unit) {
+        this.selectedUnit[1].unselect();
+        this.selectedUnit[1] = null;
+        return;
+      }
+      if (this.selectedUnit[0] == unit) return;
+      if (this.selectedUnit[1] != null) this.selectedUnit[1].unselect();
+      unit.select();
+      this.selectedUnit[1] = unit;
+      this.selectedUnit[1].setPosition(450, 450);
+    }
+  }
+
+  checkStateButtons() {
     let stateKeys = Object.keys(State);
+    
     for (let j = 0; j < this.selectedUnit.length; j++) {
-      if (this.selectedUnit[j] == null) continue; // Skip if no unit selected
+      if (this.selectedUnit[j] == null) continue;
 
       for (let k = 0; k < stateKeys.length; k++) {
         let stateName = stateKeys[k];
         let stateValue = State[stateName];
-        let ordinal = k;
         
-        // Bounds for rectMode(CENTER) rect
-        let centerX = width - 235 + 60 * ordinal;
+        let centerX = width - 235 + 60 * k;
         let centerY = 255 + j * 200;
         let btnWidth = 50;
         let btnHeight = 25;
@@ -211,38 +239,34 @@ class CharacterBrowser {
 
         if (mouseX >= xBoundLeft && mouseX <= xBoundRight &&
             mouseY >= yBoundTop && mouseY <= yBoundBottom) {
-              
-          console.log("click state");
-          let anim = this.selectedUnit[j].getAnim(stateValue);
-          
-          if (stateValue != State.IDLE) {
-            anim.setPlayOnce(true);
-          } else {
-            anim.setPlayOnce(false);
-          }
-          
-          if (stateValue == State.DEATH) {
-            this.selectedUnit[j].setLastTime();
-          }
-          
-          this.selectedUnit[j].setState(stateValue);
+          this.triggerStateChange(this.selectedUnit[j], stateValue);
           return;
         }
       }
     }
-    // characterDialogue.mousePressed() removed
+  }
+
+  triggerStateChange(unit, stateValue) {
+    let anim = unit.getAnim(stateValue);
+    
+    if (stateValue != State.IDLE) {
+      anim.setPlayOnce(true);
+    } else {
+      anim.setPlayOnce(false);
+    }
+    
+    if (stateValue == State.DEATH) {
+      unit.setLastTime();
+    }
+    
+    unit.setState(stateValue);
   }
 
   // Call this from the main p5.js mouseWheel()
   handleMouseWheel(event, units) {
     if (mouseY > height - 212.5) {
-      // event.deltaY is the p5.js equivalent of event.getCount()
-      // The sign might be reversed, adjust * -20 if needed
-      let scrollAmount = event.deltaY;
-      this.scrollOffset -= scrollAmount; // Use - to scroll "naturally"
-
+      this.scrollOffset -= event.deltaY;
       let maxScroll = (units.length * 165) - width + 50;
-      // Constrain the offset
       this.scrollOffset = constrain(this.scrollOffset, -maxScroll, 0);
     }
   }

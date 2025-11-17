@@ -1,4 +1,3 @@
-// A simple object to replace the Java 'enum'
 const State = {
   IDLE: 0,
   WALK: 1,
@@ -7,7 +6,6 @@ const State = {
 };
 
 class Unit {
-  // Constructor
   constructor(config) {
     this.detail = new UnitDetail(
       config.detail.name,
@@ -17,7 +15,6 @@ class Unit {
       config.detail.def
     );
     
-    // Create Sprite objects
     this.idle = new Sprite(config.idleConfig);
     this.attack = new Sprite(config.attackConfig);
     this.walk = new Sprite(config.walkConfig);
@@ -29,7 +26,6 @@ class Unit {
     this.width = 0;
     this.height = 0;
     this.state = State.IDLE;
-    
     this.isSelected = false;
     this.isOpening = false;
     this.dialogue = null;
@@ -38,47 +34,46 @@ class Unit {
     this.healthBar = new HealthBar(this.getHealth());
   }
 
-  // MUST BE CALLED FROM p5.js 'preload()'
-  preloadAssets() {
-    this.idle.loadImageData();
-    this.attack.loadImageData();
-    this.walk.loadImageData();
-    this.death.loadImageData();
-    this.healthBar.loadSkin();
+  // --- ASSET LOADING ---
+  loadAssets(callback) {
+    this.idle.loadImageData(callback);
+    this.attack.loadImageData(callback);
+    this.walk.loadImageData(callback);
+    this.death.loadImageData(callback);
+    this.healthBar.loadAssets(callback);
   }
 
-  // MUST BE CALLED FROM p5.js 'setup()'
   initialize() {
-    // healthBar.initialize() was here
-    
-    this.portrait = this.idle.sprites[0].get(0, 0, 100, 100);
-    this.width = this.portrait.width;
-    this.height = this.portrait.height;
-    
-    this.portrait.resize(
-      this.portrait.width * this.idle.spriteScale,
-      this.portrait.height * this.idle.spriteScale
-    );
+    if (this.healthBar) {
+      this.healthBar.initialize();
+    }
+
+    if (this.idle.sprites && this.idle.sprites[0] && this.idle.sprites[0].width > 0) {
+      let originalSprite = this.idle.sprites[0];
+      originalSprite.loadPixels();
+      
+      this.portrait = originalSprite.get(0, 0, 100, 100);
+      this.width = this.portrait.width;
+      this.height = this.portrait.height;
+      
+      this.portrait.resize(
+        this.width * this.idle.spriteScale,
+        this.height * this.idle.spriteScale
+      );
+    } else {
+      console.error("Unit has no valid idle sprite:", this.detail.getName());
+      this.portrait = null;
+    }
     
     this.setPosition(this.idle.posX, this.idle.posY);
   }
 
-  setPosition(posX, posY) {
-    this.posX = posX;
-    this.posY = posY;
-    this.idle.posX = posX;
-    this.death.posX = posX;
-    this.walk.posX = posX;
-    this.attack.posX = posX;
-    this.idle.posY = posY;
-    this.walk.posY = posY;
-    this.death.posY = posY;
-    this.attack.posY = posY;
-  }
-
-  setState(state) {
-    this.state = state;
-    this.getAnim(state).reset();
+  // --- RENDERING ---
+  displayPortrait(posX, posY) {
+    if (this.portrait != null) {
+      imageMode(CENTER);
+      image(this.portrait, posX, posY + 25);
+    }
   }
 
   render() {
@@ -92,16 +87,6 @@ class Unit {
     text(this.detail.getName(), this.posX, this.posY - this.width);
     
     this.healthBar.render(this.posX, this.posY - this.width + 50);
-  }
-
-  getAnim(state) {
-    switch (state) {
-      case State.IDLE: return this.idle;
-      case State.ATTACK: return this.attack;
-      case State.WALK: return this.walk;
-      case State.DEATH: return this.death;
-      default: return null;
-    }
   }
 
   doAction() {
@@ -123,33 +108,30 @@ class Unit {
         if (!this.isOpening) this.isOpening = true;
         break;
       case State.DEATH:
-        this.death.setPlayOnce(true);
         this.death.play();
         if (this.death.currentIndex >= this.death.totalSize - 1) {
           if (millis() > this.lastTime + 3000) {
-            // Respawn logic or something
-            setIdle();
+            this.setIdle();
           }
         }
         break;
     }
   }
 
-  displayPortrait(posX, posY) {
-    if (this.portrait) {
-      image(this.portrait, posX, posY + 25);
+  // --- STATE MANAGEMENT ---
+  setState(state) {
+    this.state = state;
+    this.getAnim(state).reset();
+  }
+
+  getAnim(state) {
+    switch (state) {
+      case State.IDLE: return this.idle;
+      case State.ATTACK: return this.attack;
+      case State.WALK: return this.walk;
+      case State.DEATH: return this.death;
+      default: return null;
     }
-  }
-
-
-  select() {
-    this.isSelected = true;
-    this.setAttack();
-  }
-
-  unselect() {
-    this.isSelected = false;
-    this.isOpening = false;
   }
 
   setIdle() { this.setState(State.IDLE); }
@@ -160,6 +142,32 @@ class Unit {
     this.setLastTime();
   }
 
+  // --- POSITIONING ---
+  setPosition(posX, posY) {
+    this.posX = posX;
+    this.posY = posY;
+    this.idle.posX = posX;
+    this.attack.posX = posX;
+    this.walk.posX = posX;
+    this.death.posX = posX;
+    this.idle.posY = posY;
+    this.attack.posY = posY;
+    this.walk.posY = posY;
+    this.death.posY = posY;
+  }
+
+  // --- SELECTION ---
+  select() {
+    this.isSelected = true;
+    this.setAttack();
+  }
+
+  unselect() {
+    this.isSelected = false;
+    this.isOpening = false;
+  }
+
+  // --- GETTERS ---
   setLastTime() { this.lastTime = millis(); }
   isSelected() { return this.isSelected; }
   getName() { return this.detail.getName(); }
@@ -168,6 +176,6 @@ class Unit {
   getDescription() { return this.detail.getDescription(); }
 
   toString() {
-    return `{ Name: ${this.detail.name}, ATK:${this.detail.atk}, Health:${this.detail.health}}`;
+    return `{ Name: ${this.detail.name}, ATK: ${this.detail.atk}, Health: ${this.detail.health} }`;
   }
 }
