@@ -1,4 +1,4 @@
 {
-    "assets" : "assets",
+    "assets" : "public/assets",
     "dlc": false
 }

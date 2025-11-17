@@ -7,7 +7,7 @@ const port = 3000;
 
 
 app.use(express.static('public'));
-const assetsDir = path.join(__dirname, 'assets');
+const assetsDir = path.join(__dirname, 'public','assets');
 
 const startServer = async () => {
   let config;
