@@ -1,8 +1,9 @@
+
 class HealthBar {
   // Java constructor with config file is removed.
   // We use a simpler constructor and a hardcoded path.
   constructor(maxHealth) {
-    this.imageFileName = '/assets/HealthBar/HealthBar/HealthBar.png'; // Using your API path
+    this.imageFileName = '/assets/HealthBar/HealthBar.png'; // Using your API path
     this.healthBarSkin = null; // Will be loaded in preload
 
     this.skinWidth = 100; // Default values before image loads

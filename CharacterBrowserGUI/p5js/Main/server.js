@@ -34,6 +34,28 @@ const startServer = async () => {
     res.json(units);
   })
 
+  app.get('/assets/:element/:fileName', (req, res) => {
+    const { element, fileName } = req.params;
+
+    // Create the full, absolute path
+    const filePath = path.join(assetsDir, element, fileName);
+
+    // Security check
+    if (!filePath.startsWith(assetsDir)) {
+      return res.status(403).send('Forbidden');
+    }
+
+    // Send the file
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        console.log(`File not found: ${req.path}`);
+        res.status(404).send("File not found");
+      } else {
+        console.log(`Sent file: ${req.path}`);
+      }
+    });
+  });
+  
   app.get('/assets/:unitName/:unitAction/:fileName', (req, res) => {
     const unitName = req.params.unitName;
     const unitAction = req.params.unitAction;

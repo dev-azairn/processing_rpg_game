@@ -34,6 +34,8 @@ class Unit {
     this.isOpening = false;
     this.dialogue = null;
     this.lastTime = millis();
+
+    this.healthBar = new HealthBar(this.getHealth());
   }
 
   // MUST BE CALLED FROM p5.js 'preload()'
@@ -42,7 +44,7 @@ class Unit {
     this.attack.loadImageData();
     this.walk.loadImageData();
     this.death.loadImageData();
-    // healthBar.loadSkin() was here
+    this.healthBar.loadSkin();
   }
 
   // MUST BE CALLED FROM p5.js 'setup()'
@@ -83,13 +85,13 @@ class Unit {
     this.doAction();
 
     stroke(0);
-    strokeWeight(4);
+    strokeWeight(1);
     fill(0);
     textAlign(CENTER);
     textSize(16);
     text(this.detail.getName(), this.posX, this.posY - this.width);
     
-    // healthBar.render() was here
+    this.healthBar.render(this.posX, this.posY - this.width + 50);
   }
 
   getAnim(state) {
@@ -126,7 +128,7 @@ class Unit {
         if (this.death.currentIndex >= this.death.totalSize - 1) {
           if (millis() > this.lastTime + 3000) {
             // Respawn logic or something
-            // setIdle();
+            setIdle();
           }
         }
         break;
@@ -138,6 +140,7 @@ class Unit {
       image(this.portrait, posX, posY + 25);
     }
   }
+
 
   select() {
     this.isSelected = true;
