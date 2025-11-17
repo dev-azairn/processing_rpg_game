@@ -1,9 +1,0 @@
-Fenrir
-200
-30
-10
-Master of sword fenrir... Don't make him mad
-Werewolf_Idle.txt
-Werewolf_Attack.txt
-Werewolf_Walk.txt
-Werewolf_Death.txt

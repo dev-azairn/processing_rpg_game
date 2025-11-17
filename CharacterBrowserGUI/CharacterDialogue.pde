@@ -8,6 +8,7 @@ class CharacterDialogue {
   String currentLine = "";
 
   HashMap<String, Unit> allUnits;
+  HashMap<String, JSONObject> allDialogueData;
   Unit activeSpeakerUnit = null; 
 
   int bubbleWidth = 220; 
@@ -17,55 +18,51 @@ class CharacterDialogue {
   int lineStartTime;
   final int LINE_DELAY = 2000; 
   
-  CharacterDialogue(HashMap<String, Unit> units) {
+  CharacterDialogue(HashMap<String, Unit> units, HashMap<String, JSONObject> allDialogueData) {
     this.allUnits = units;
+    this.allDialogueData = allDialogueData;
     currentConversation = new JSONArray();
   }
 
-  String getDialoguePath(Unit u) {
-    String folderPath = u.idle.characterFolder; 
-    String[] parts = split(folderPath, '/');
-    String className = parts[parts.length - 1]; 
-    return "data/Dialogue_" + className + ".json";
-  }
-
-
   void startNormalDialogue(Unit selectedUnit) {
     if (isActive) endDialogue(); 
-    String dialoguePath = getDialoguePath(selectedUnit);
-    JSONObject data = loadJSONObject(dialoguePath);    
+    String[] parts = split(selectedUnit.idle.characterFolder, '/');
+    String className = parts[parts.length - 1]; 
+    JSONObject data = allDialogueData.get(className); 
     if (data == null) {
-      println("ERROR: Could not find " + dialoguePath);
+      println("ERROR: No dialogue data found in map for " + className);
       return;
     }    
     JSONArray allNormalLines = data.getJSONArray("normal");    
     if (allNormalLines == null || allNormalLines.size() == 0) {
-       println("No 'normal' lines found in " + dialoguePath);
+       println("No 'normal' lines found for " + className);
        return;
-    }
+    }    
     int randomIndex = int(random(allNormalLines.size()));
-    JSONObject randomLine = allNormalLines.getJSONObject(randomIndex);
+    JSONObject randomLine = allNormalLines.getJSONObject(randomIndex);      
     currentConversation = new JSONArray();
-    currentConversation.append(randomLine); 
-    startPlaying();
+    currentConversation.append(randomLine);      
+    startPlaying(); 
   }
-
+  
   void startTauntDialogue(Unit unit1, Unit unit2) {
     if (isActive) endDialogue();
     String name1 = unit1.detail.getName();
-    String name2 = unit2.detail.getName();
-    String path1 = getDialoguePath(unit1);
-    String path2 = getDialoguePath(unit2);
-    JSONObject data1 = loadJSONObject(path1);
-    JSONObject data2 = loadJSONObject(path2);
+    String name2 = unit2.detail.getName(); 
+    String[] parts1 = split(unit1.idle.characterFolder, '/');
+    String className1 = parts1[parts1.length - 1]; 
+    String[] parts2 = split(unit2.idle.characterFolder, '/');
+    String className2 = parts2[parts2.length - 1];
+    JSONObject data1 = allDialogueData.get(className1); 
+    JSONObject data2 = allDialogueData.get(className2); 
     if (data1 == null || data2 == null) {
-      println("ERROR: Missing dialogue file for " + name1 + " ("+path1+") or " + name2 + " ("+path2+")");
+      println("ERROR: Missing dialogue data in map for " + className1 + " or " + className2);
       return;
     }
     JSONArray taunts1 = data1.getJSONArray("taunt");
-    JSONArray taunts2 = data2.getJSONArray("taunt");   
-    currentConversation = new JSONArray();
-    JSONObject line1 = findLineWithTo(taunts1, name2);
+    JSONArray taunts2 = data2.getJSONArray("taunt");    
+    currentConversation = new JSONArray();     
+    JSONObject line1 = findLineWithTo(taunts1, name2); 
     JSONObject line2 = findLineWithTo(taunts2, name1); 
     if (line1 != null && line2 != null) {
       println("Special interaction triggered between " + name1 + " and " + name2 + "!");
@@ -75,11 +72,10 @@ class CharacterDialogue {
     else {
       println("Generic taunt triggered!");
       JSONObject genericLine1 = findRandomGenericLine(taunts1);
-      if (genericLine1 != null) currentConversation.append(genericLine1);
-      
+      if (genericLine1 != null) currentConversation.append(genericLine1);      
       JSONObject genericLine2 = findRandomGenericLine(taunts2);
       if (genericLine2 != null) currentConversation.append(genericLine2);
-    }
+    }   
     if (currentConversation.size() > 0) {
       startPlaying();
     } else {

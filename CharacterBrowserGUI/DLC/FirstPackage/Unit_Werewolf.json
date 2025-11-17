@@ -1,0 +1,13 @@
+{
+    "detail": {
+        "name": "Fenrir",
+        "health": 200,
+        "atk": 30,
+        "def": 10,
+        "description": "Master of sword fenrir... Don't make him mad"
+    },
+    "idleConfig": "Werewolf_Idle.txt",
+    "attackConfig": "Werewolf_Attack.txt",
+    "walkConfig": "Werewolf_Walk.txt",
+    "deathConfig": "Werewolf_Death.txt"
+}

@@ -7,6 +7,7 @@ class FileManager {
   boolean containsDLC;
   String[] allowedExtension = {".json", ".txt", ".ini"};
   String healthBarConfigPath;
+  HashMap<String, JSONObject> dialogueData;
   FileManager() {
       
   }
@@ -39,15 +40,15 @@ class FileManager {
     File[] files = directory.listFiles();
     if (files != null) {
       healthBarConfigPath = connectedPath(dataPath, "HealthBar.txt");
+      dialogueData = new HashMap<>();
       for (File file: files) {
         if (!file.isFile()) continue;
-        String fileName = file.getName(); 
-        int extensionIndex = fileName.indexOf('.');
-        if (fileName.startsWith("Unit")) {
-          if (fileName.endsWith(".json")) loadUnitJSONData(dataDirectoryPath, fileName);
-          else if (fileName.endsWith(".txt") || fileName.endsWith(".ini")) loadUnitTextData(file.getParentFile().getName(), file.getName());
-          loadDialogueData(dataDirectoryPath, "Dialogue_" + fileName.substring(5, extensionIndex) + ".json");
-        } 
+        String fileName = file.getName();         
+        if (fileName.startsWith("Unit_") && fileName.endsWith(".json")) {
+          loadUnitJSONData(dataPath, fileName); 
+          String className = fileName.substring(5, fileName.lastIndexOf('.'));
+          loadDialogueData(dataPath, className);
+        }
       } 
     }
     else {
@@ -73,7 +74,7 @@ class FileManager {
     
     //for (int i = 0; i < dlcConfig.size(); i++) {
     //  JSONObject obj = dlcConfig.getJSONObject(i);
-    //  keyLists.put(obj.getString("type"), obj.getJSONArray("keyLists"));  
+    //  keyLists.put(obj.getString("type"), obj.getJSONArray("keyLists"));  loading
     //  println(obj);
     //}
     
@@ -104,12 +105,13 @@ class FileManager {
       }
     }
     if(!isCheck) return;
-    if (fileName.startsWith("Unit_")) 
-    {
-      if (fileName.endsWith(".json")) loadUnitJSONData(dirPath, fileName);
-      else if (fileName.endsWith(".txt") || fileName.endsWith(".ini")) loadUnitTextData(dirPath, fileName);
-    } else if (fileName.startsWith("Skin_")) {
-      loadSkinData(dirPath, fileName);
+    if (fileName.startsWith("Unit_") && fileName.endsWith(".json")) {
+      String className = fileName.substring(5, fileName.lastIndexOf('.'));
+      loadUnitJSONData(baseDir, fileName);
+      loadDialogueData(baseDir, className);     
+    } 
+    else if (fileName.startsWith("Skin_")) {
+      loadSkinData(baseDir, fileName);
     }
   }
    
@@ -128,6 +130,7 @@ class FileManager {
       println("No healthbar config");
       exit();
     }
+    String className = fileName.substring(5, fileName.lastIndexOf('.'));
     
     JSONObject data = loadJSONObject(connectedPath(configDir, fileName));
     if (data == null) {
@@ -152,6 +155,7 @@ class FileManager {
       
      units.put(detail.getString("name"), unit);
         // Test   
+     loadDialogueData(configDir, className);
   }
   
   private void loadUnitTextData(String configDir, String fileName) {
@@ -175,11 +179,24 @@ class FileManager {
     connectedPath(configDir,lines[8]), 
     healthBarConfigPath);
     units.put(lines[0], unit);
+    String className = fileName.substring(5, fileName.lastIndexOf('.')); 
+    loadDialogueData(configDir, className);
   }
   
-  private void loadDialogueData(String configDir, String fileName){
-    println(fileName);
-    if(!isExist(connectedPath(configDir, fileName))) println("No file read");
+  private void loadDialogueData(String configDir, String unitName) {
+    String path = connectedPath(configDir, "Dialogue_" + unitName + ".json");
+    JSONObject data = loadJSONObject(path);
+    if (data != null) {
+      println("Successfully loaded dialogue for: " + unitName);
+      dialogueData.put(unitName, data);
+    } 
+    else {
+      println("WARNING: No dialogue file found at " + path);
+      JSONObject emptyData = new JSONObject();
+      emptyData.setJSONArray("normal", new JSONArray());
+      emptyData.setJSONArray("taunt", new JSONArray());
+      dialogueData.put(unitName, emptyData);
+    }
   }
   
   boolean isExist(String filePath) {

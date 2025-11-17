@@ -7,7 +7,7 @@ class CharacterBrowser {
   CharacterBrowser() {
     selectedUnit = new Unit[2];
     background = loadImage("data/Podium/Scene.jpg");
-    characterDialogue = new CharacterDialogue(units);
+    characterDialogue = new CharacterDialogue(units, manager.dialogueData);
   }
   
   
